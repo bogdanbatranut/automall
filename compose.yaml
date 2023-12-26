@@ -2,3 +2,13 @@ services:
   automallweb:
     build:
       dockerfile: Dockerfile
+      ports:
+        - 80:80
+      expose:
+        - 80
+      networks:
+        - internalnet
+
+networks:
+  internalnet:
+    driver: bridge
