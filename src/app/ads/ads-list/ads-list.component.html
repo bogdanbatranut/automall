@@ -1,0 +1,6 @@
+<ng-container>
+  <div *ngFor="let ad of ads$ | async; index as i">
+    <app-ad [ad] = ad></app-ad>
+    <hr class="hr" />
+  </div>
+</ng-container>

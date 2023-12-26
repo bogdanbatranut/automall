@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Market: {{ad!.Market!.Name}} </h4>
+  </div>
+<!--  <img src="..." class="card-img-top" alt="...">-->
+  <div class="card-body">
+    <h5 class="card-title">{{ad.Brand}} {{ad.CarModel}}</h5>
+<!--    <p class="card-text">{{ad.Prices | json}}</p>-->
+    <div *ngFor="let price of ad.Prices ; index as i">
+      <p class="card-text">{{price.Price}} {{price.CreatedAt}}</p>
+    </div>
+    <a (click)="goToLink(ad.Ad_url)" class="btn btn-primary">Go to ad</a>
+  </div>
+</div>
