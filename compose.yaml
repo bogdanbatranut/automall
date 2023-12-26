@@ -4,9 +4,3 @@ services:
       dockerfile: Dockerfile
       ports:
         - 80:80
-      networks:
-        - internalnet
-
-networks:
-  internalnet:
-    driver: bridge
