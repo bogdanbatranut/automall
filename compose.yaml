@@ -4,8 +4,6 @@ services:
       dockerfile: Dockerfile
       ports:
         - 80:80
-      expose:
-        - 80
       networks:
         - internalnet
 
