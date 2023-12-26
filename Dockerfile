@@ -19,6 +19,6 @@ FROM nginx:latest AS ngi
 
 COPY /nginx.conf  /etc/nginx/conf.d/default.conf
 RUN rm -rf /usr/share/nginx/html/*
-COPY --from=build /dist/src/app/dist/automall /usr/share/nginx/html
+COPY --from=build /dist/src/app/automall /usr/share/nginx/html
 
 #EXPOSE 80
