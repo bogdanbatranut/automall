@@ -12,7 +12,7 @@ RUN npm run build
 # Stage 2 Serve app with nginx
 #  Use official nginx image
 FROM nginx:latest
-# Copu the build output to replace the default nginx contentx
-COPY --from=build /usr/local/app/dist/automall /usr/share/nginx/html
+# Copy the build output to replace the default nginx contentx
+COPY --from=build /usr/local/app/automall /usr/share/nginx/html
 
 EXPOSE 80
