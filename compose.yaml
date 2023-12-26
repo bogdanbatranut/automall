@@ -2,5 +2,5 @@ services:
   automallweb:
     build:
       dockerfile: Dockerfile
-      ports:
-        - "80:80"
+    ports:
+      - "80:80"
