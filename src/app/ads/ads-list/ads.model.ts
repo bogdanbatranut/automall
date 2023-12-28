@@ -1,5 +1,5 @@
 export interface AdModelResponse {
-  Ads : AdModel[]
+  Data : AdModel[]
 }
 
 export class AdModel {
@@ -7,7 +7,7 @@ export class AdModel {
   public Brand : string
   public CarModel : string
   public Ad_url : string
-  public Prices : Price[] | null
+  public Prices : Price[]
   public Market : Market
   public Year : number
   public Km : number
@@ -17,7 +17,7 @@ export class AdModel {
     Brand : string,
     CarModel : string,
     Ad_url : string,
-    Prices : Price[] | null,
+    Prices : Price[],
     Market : Market,
     Year : number,
     Km : number
