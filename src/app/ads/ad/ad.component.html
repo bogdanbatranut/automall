@@ -5,7 +5,7 @@
 <!--  <img src="..." class="card-img-top" alt="...">-->
   <div class="card-body">
     <h5 class="card-title">{{ad.Brand}} {{ad.CarModel}} {{ad.Year}} {{ad.Km.toLocaleString("ro-RO")}} Km</h5>
-<!--    <p class="card-text">{{ad.Prices | json}}</p>-->
+    <p class="card-text">Published : {{ad.Age}} days ago</p>
     <div *ngFor="let price of ad.Prices ; index as i">
       <p class="card-text">{{price.Price.toLocaleString("ro-RO")}} {{price.CreatedAt}}</p>
     </div>

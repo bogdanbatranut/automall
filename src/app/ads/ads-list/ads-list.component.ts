@@ -31,7 +31,7 @@ export class AdsListComponent implements OnInit{
         map(res => {
           return res.Data.map(ad => {return new AdModel(ad.ID, ad.Brand, ad.CarModel, ad.Ad_url,
             ad.Prices.map(price => { return new Price(price.ID, price.Price, (new Date(price.CreatedAt).toLocaleDateString("ro-RO")))
-            }),ad.Market, ad.Year, ad.Km
+            }),ad.Market, ad.Year, ad.Km, ad.Age
             )
           })
         })

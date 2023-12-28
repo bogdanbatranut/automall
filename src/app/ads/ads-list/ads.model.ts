@@ -11,6 +11,7 @@ export class AdModel {
   public Market : Market
   public Year : number
   public Km : number
+  public Age : number
 
   constructor(
     ID : number,
@@ -20,7 +21,8 @@ export class AdModel {
     Prices : Price[],
     Market : Market,
     Year : number,
-    Km : number
+    Km : number,
+    Age : number,
 
   ) {
     this.ID = ID
@@ -31,6 +33,7 @@ export class AdModel {
     this.Market = Market
     this.Year = Year
     this.Km = Km
+    this.Age = Age
   }
 }
 
