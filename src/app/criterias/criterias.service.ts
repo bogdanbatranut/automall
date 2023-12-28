@@ -3,6 +3,7 @@ import { HttpClient} from "@angular/common/http";
 import {CriteriaModel} from "./criterias.model";
 import {AdModel} from "../ads/ads-list/ads.model";
 import {environment} from "../../environments/environment";
+import {map, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class CriteriasService {
     return this.http.get<CriteriaModel[]>(this.criteriasURL)
   }
 
-  getAdsForCriteriaId(id : number) {
+  getAdsForCriteriaId(id : number) : Observable<AdModel[]>{
     return this.http.get<AdModel[]>(this.adsURL + "/" + id)
   }
 }

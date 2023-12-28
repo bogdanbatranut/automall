@@ -4,7 +4,7 @@
   </div>
 <!--  <img src="..." class="card-img-top" alt="...">-->
   <div class="card-body">
-    <h5 class="card-title">{{ad.Brand}} {{ad.CarModel}}</h5>
+    <h5 class="card-title">{{ad.Brand}} {{ad.CarModel}} {{ad.Year}} {{ad.Km}} Km</h5>
 <!--    <p class="card-text">{{ad.Prices | json}}</p>-->
     <div *ngFor="let price of ad.Prices ; index as i">
       <p class="card-text">{{price.Price}} {{price.CreatedAt}}</p>

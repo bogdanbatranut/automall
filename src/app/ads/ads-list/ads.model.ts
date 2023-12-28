@@ -1,3 +1,7 @@
+export interface AdModelResponse {
+  Ads : AdModel[]
+}
+
 export class AdModel {
   public ID : number
   public Brand : string
@@ -5,6 +9,8 @@ export class AdModel {
   public Ad_url : string
   public Prices : Price[] | null
   public Market : Market
+  public Year : number
+  public Km : number
 
   constructor(
     ID : number,
@@ -12,7 +18,10 @@ export class AdModel {
     CarModel : string,
     Ad_url : string,
     Prices : Price[] | null,
-    Market : Market
+    Market : Market,
+    Year : number,
+    Km : number
+
   ) {
     this.ID = ID
     this.Brand = Brand
@@ -20,7 +29,8 @@ export class AdModel {
     this.Ad_url = Ad_url
     this.Prices = Prices
     this.Market = Market
-
+    this.Year = Year
+    this.Km = Km
   }
 }
 

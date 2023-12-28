@@ -13,7 +13,7 @@ import {JsonPipe, NgForOf} from "@angular/common";
   styleUrl: './ad.component.css'
 })
 export class AdComponent {
-  @Input() ad : AdModel  = new AdModel(0, "", "", "", null, new Market(0, ""))
+  @Input() ad : AdModel  = new AdModel(0, "", "", "", null, new Market(0, ""), 0, 0)
 
   goToLink(url: string){
     window.open(url, "_blank");
