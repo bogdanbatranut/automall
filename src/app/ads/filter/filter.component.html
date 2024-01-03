@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" [formGroup]="filterForm">
+<!--      <form [formGroup] = "filterForm">-->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Criterias
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+<!--                <li *ngFor="let criteria of criterias | async; index as i">-->
+<!--                  <a class="dropdown-item" [routerLink]="['/ads-list',criteria.ID]" routerLinkActive="active" ariaCurrentWhenActive="page">{{criteria.brand}} {{criteria.carModel}}</a>-->
+<!--                </li>-->
+                <li *ngFor="let criteria of criterias | async; index as i">
+                  <button class="dropdown-item" type="button" (click)="criteriaChanged(criteria.ID)">{{criteria.brand}} {{criteria.carModel}}</button>
+                </li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" formGroupName="filters">
+          <div *ngFor="let market of markets | async; index as k">
+            <div formGroupName="{{k}}">
+              <input type="hidden" class="btn-check" id="btnid{{k}}" autocomplete="off" formControlName="id">
+              <input type="checkbox" class="btn-check" id="btncheck{{k}}" autocomplete="off" formControlName="checked" name="marketId">
+              <label class="btn btn-outline-primary" for="btncheck{{k}}">{{market.Name}}</label>
+            </div>
+          </div>
+
+        </div>
+      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-2">
+        <input type="radio" class="btn-check" name="sortOption" value="byPrice" id="option5" autocomplete="off" bindQueryParam="sortOption" checked>
+        <label class="btn" for="option5">By Price</label>
+
+        <input type="radio" class="btn-check" name="sortOption" value="byAge" id="option6" autocomplete="off" bindQueryParam="sortOption">
+        <label class="btn" for="option6">By Age</label>
+
+        <input type="radio" class="btn-check" name="sortOptionDirection" value="asc" id="option7" autocomplete="off" bindQueryParam="sortOptionDirection" checked>
+        <label class="btn" for="option7">Asc</label>
+
+        <input type="radio" class="btn-check" name="sortOptionDirection" value="desc" id="option8" bindQueryParam="sortOptionDirection" autocomplete="off">
+        <label class="btn" for="option8">Desc</label>
+      </ul>
+<!--      </form>-->
+
+
+    </div>
+  </div>
+</nav>
+
+<ng-container>
+<!--  <router-outlet></router-outlet>-->
+  <app-ads-list [formData]="filterForm" ></app-ads-list>
+</ng-container>
