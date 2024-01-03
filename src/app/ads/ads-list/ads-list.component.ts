@@ -15,7 +15,8 @@ import {FormGroup} from "@angular/forms";
     AsyncPipe,
     AdComponent,
     NgForOf,
-    JsonPipe
+    JsonPipe,
+    AdsService
   ],
   templateUrl: './ads-list.component.html',
   styleUrl: './ads-list.component.css'
@@ -27,7 +28,6 @@ export class AdsListComponent implements OnInit{
 
   constructor(private criteriasService : CriteriasService, private route: ActivatedRoute, private adsService : AdsService) {
     this.ads$ = new Observable<AdModel[]>()
-
   }
 
   ngOnInit(): void {
