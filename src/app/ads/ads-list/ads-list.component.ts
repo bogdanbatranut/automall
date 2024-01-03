@@ -16,7 +16,6 @@ import {FormGroup} from "@angular/forms";
     AdComponent,
     NgForOf,
     JsonPipe,
-    AdsService
   ],
   templateUrl: './ads-list.component.html',
   styleUrl: './ads-list.component.css'
