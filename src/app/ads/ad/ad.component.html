@@ -4,6 +4,7 @@
   </div>
 <!--  <img src="..." class="card-img-top" alt="...">-->
   <div class="card-body">
+    <h5 class="card-title"> {{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} EUR</h5>
     <h5 class="card-title">{{ad.Brand}} {{ad.CarModel}} {{ad.Year}} {{ad.Km.toLocaleString("ro-RO")}} Km</h5>
     <p class="card-text">Published : {{ad.Age}} days ago</p>
     <div *ngFor="let price of ad.Prices ; index as i">

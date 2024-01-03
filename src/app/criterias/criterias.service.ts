@@ -26,7 +26,6 @@ export class CriteriasService {
 
   getAdsForCriteriaId(id : number) : Observable<AdModelResponse>{
     return this.http.get<AdModelResponse>(this.adsURL + "/" + id).pipe(
-
     )
   }
 }
