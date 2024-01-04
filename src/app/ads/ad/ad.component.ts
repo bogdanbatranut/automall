@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {AdModel, Market, Price} from "../ads-list/ads.model";
-import {JsonPipe, NgForOf, NgIf} from "@angular/common";
+import {DecimalPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
 
 @Component({
@@ -10,7 +10,8 @@ import {CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
     JsonPipe,
     NgForOf,
     CanvasJSAngularChartsModule,
-    NgIf
+    NgIf,
+    DecimalPipe
   ],
   templateUrl: './ad.component.html',
   styleUrl: './ad.component.css'
@@ -47,7 +48,7 @@ export class AdComponent {
   }
 
   ngOnInit() {
-    this.showChart = this.ad.Prices.length > 1
+    this.showChart = this.ad.Prices.length > 3
     let dataPoints : any[] = []
 
     let data : {
@@ -74,5 +75,15 @@ export class AdComponent {
 
   goToLink(url: string){
     window.open(url, "_blank");
+  }
+
+  getBackGroundColor(){
+    if (this.ad.DiscountValue > 0) {
+      return "#E0FFFF"
+    }
+    if (this.ad.DiscountValue < 0) {
+      return "#FFE4C4"
+    }
+      return "#FFFFFF"
   }
 }

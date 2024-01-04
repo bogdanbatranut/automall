@@ -12,6 +12,8 @@ export class AdModel {
   public Year : number
   public Km : number
   public Age : number
+  public DiscountValue : number
+  public DiscountPercent : number
 
   constructor(
     ID : number,
@@ -34,7 +36,12 @@ export class AdModel {
     this.Year = Year
     this.Km = Km
     this.Age = Age
+    this.DiscountValue = this.Prices[0].Price - this.Prices[this.Prices.length -1].Price
+    this.DiscountPercent = (this.Prices[0].Price - this.Prices[this.Prices.length -1].Price)/this.Prices[0].Price * 100
   }
+
+
+
 }
 
 export class Price {

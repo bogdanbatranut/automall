@@ -3,10 +3,13 @@
     <h4>Market: {{ad!.Market!.Name}} </h4>
   </div>
 <!--  <img src="..." class="card-img-top" alt="...">-->
-  <div class="card-body">
+  <div class="card-body" [style.background]="getBackGroundColor()" >
+
     <div class="row">
 
       <div class="col">
+        <h5 *ngIf="ad.DiscountValue != 0">Discount percent: {{ad.DiscountPercent | number : "1.00-2" }}%</h5>
+        <h5 *ngIf="ad.DiscountValue != 0">Discount value: {{ad.DiscountValue}} </h5>
         <h5 class="card-title"> {{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} EUR</h5>
         <h5 class="card-title">{{ad.Brand}} {{ad.CarModel}} {{ad.Year}} {{ad.Km.toLocaleString("ro-RO")}} Km</h5>
         <p class="card-text">Published : {{ad.Age}} days ago</p>
