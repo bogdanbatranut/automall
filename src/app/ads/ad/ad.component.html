@@ -4,34 +4,29 @@
   </div>
 <!--  <img src="..." class="card-img-top" alt="...">-->
   <div class="card-body" [style.background]="getBackGroundColor()" >
+    <div class="container">
+      <div class="row">
 
-    <div class="row">
-
-      <div class="col">
-        <h5 *ngIf="ad.DiscountValue != 0">Discount percent: {{ad.DiscountPercent | number : "1.00-2" }}%</h5>
-        <h5 *ngIf="ad.DiscountValue != 0">Discount value: {{ad.DiscountValue}} </h5>
-        <h5 class="card-title"> {{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} EUR</h5>
-        <h5 class="card-title">{{ad.Brand}} {{ad.CarModel}} {{ad.Year}} {{ad.Km.toLocaleString("ro-RO")}} Km</h5>
-        <p class="card-text">Published : {{ad.Age}} days ago</p>
-        <div *ngFor="let price of ad.Prices ; index as i">
-          <p class="card-text">&euro; {{price.Price.toLocaleString("ro-RO")}} {{price.CreatedAt}}</p>
+        <div class="col-lg">
+          <h5 *ngIf="ad.DiscountValue != 0">Discount percent: {{ad.DiscountPercent | number : "1.00-2" }}%</h5>
+          <h5 *ngIf="ad.DiscountValue != 0">Discount value: {{ad.DiscountValue}} </h5>
+          <h5 class="card-title"> {{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} EUR</h5>
+          <h5 class="card-title">{{ad.Brand}} {{ad.CarModel}} {{ad.Year}} {{ad.Km.toLocaleString("ro-RO")}} Km</h5>
+          <p class="card-text">Published : {{ad.Age}} days ago</p>
+          <div *ngFor="let price of ad.Prices ; index as i">
+            <p class="card-text">&euro; {{price.Price.toLocaleString("ro-RO")}} {{price.CreatedAt}}</p>
+          </div>
+        </div>
+        <div class="col-lg">
+          <canvasjs-chart [options]="chartOptions" *ngIf="showChart"></canvasjs-chart>
         </div>
       </div>
-      <div class="col" >
-        <canvasjs-chart [options]="chartOptions" *ngIf="showChart"></canvasjs-chart>
-      </div>
-      <div class="col">
-        Show chart {{showChart}}
-      </div>
-      <div class="col">
-        Col 4
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
+      <div class="row">
+        <div class="col">
 
-        <a (click)="goToLink(ad.Ad_url)" class="btn btn-primary">Go to ad</a>
+          <a (click)="goToLink(ad.Ad_url)" class="btn btn-primary">Go to ad</a>
 
+        </div>
       </div>
     </div>
   </div>
