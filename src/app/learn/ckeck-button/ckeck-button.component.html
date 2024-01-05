@@ -1,0 +1,9 @@
+<div [formGroup]="form">
+<!--  <input type="hidden" class="btn-check" id="btnid{{k}}" autocomplete="off" formControlName="id">-->
+  <input type="checkbox" class="btn-check" id="btncheck" autocomplete="off" formControlName="checkButton" name="marketId">
+  <label class="btn btn-outline-primary" for="btncheck">{{form.get('name')!.value | json}}</label>
+</div>
+<pre>
+  button form value -> : {{form.value | json}}
+</pre>
+

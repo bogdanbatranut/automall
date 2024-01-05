@@ -1,0 +1,9 @@
+<p>parent-form works!</p>
+<pre>
+  parent form value : -> {{form.value | json}}
+</pre>
+<form [formGroup]="form">
+  <app-ckeck-button formControlName="child"> </app-ckeck-button>
+</form>
+
+

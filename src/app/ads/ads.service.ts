@@ -8,21 +8,21 @@ import {AdModelResponse} from "./ads-list/ads.model";
 })
 export class AdsService {
 
-  adsURL = "http://dev.auto-mall.ro"
+  // adsURL = "http://dev.auto-mall.ro"
+adsURL = "http://127.0.0.1"
 
   constructor( private http : HttpClient
   ) { }
 
   getAds(form : any) : Observable<AdModelResponse>{
-    console.log("get ads -----", form)
     let criteriaId = form.criteriaId
     let params = new HttpParams();
     params = params.append("sortOption", form.sortOption)
     params = params.append("sortOptionDirection", form.sortOptionDirection);
+    params = params.append("limitLow", form.limitLow)
+    params = params.append("limitHigh", form.limitHigh)
     let marketsList : number[] = [];
     let marketList : [{checked : boolean, id : number}] = form.filters
-    console.log("      ---- ", form.filters)
-
     marketList.map(
       item => {
         if (item.checked) {
@@ -34,7 +34,6 @@ export class AdsService {
     params = params.append("markets", marketsList.join(","))
     // let criteriaId = url.split("/")[2]
     let finalURL = this.adsURL + ":8080/adsforcriteria/" + criteriaId
-    console.log("getting ads ....")
     return this.http.get<any>(finalURL, {params : params})
 
   }

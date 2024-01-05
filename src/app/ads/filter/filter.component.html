@@ -34,18 +34,44 @@
         </div>
       </ul>
       <ul class="navbar-nav me-auto mb-2 mb-lg-2">
-        <input type="radio" class="btn-check" name="sortOption" value="byPrice" id="option5" autocomplete="off" bindQueryParam="sortOption" checked>
+        <input type="radio" class="btn-check" name="sortOption" value="byPrice" id="option5" autocomplete="off" bindQueryParam="sortOption" formControlName="sortOption" checked>
         <label class="btn" for="option5">By Price</label>
 
-        <input type="radio" class="btn-check" name="sortOption" value="byAge" id="option6" autocomplete="off" bindQueryParam="sortOption">
+        <input type="radio" class="btn-check" name="sortOption" value="byAge" id="option6" autocomplete="off" bindQueryParam="sortOption" formControlName="sortOption">
         <label class="btn" for="option6">By Age</label>
 
-        <input type="radio" class="btn-check" name="sortOptionDirection" value="asc" id="option7" autocomplete="off" bindQueryParam="sortOptionDirection" checked>
+        <input type="radio" class="btn-check" name="sortOptionDirection" value="asc" id="option7" autocomplete="off" bindQueryParam="sortOptionDirection" formControlName="sortOptionDirection" checked>
         <label class="btn" for="option7">Asc</label>
 
-        <input type="radio" class="btn-check" name="sortOptionDirection" value="desc" id="option8" bindQueryParam="sortOptionDirection" autocomplete="off">
+        <input type="radio" class="btn-check" name="sortOptionDirection" value="desc" id="option8" bindQueryParam="sortOptionDirection" autocomplete="off" formControlName="sortOptionDirection">
         <label class="btn" for="option8">Desc</label>
+
       </ul>
+
+       <ul class="navbar-nav me-auto mb-2 mb-lg-2">
+         <label for="priceLow" class="form-label">Low</label>
+         <input type="number" step="500" class="form-control" id="priceLow" formControlName="limitLow">
+       </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-2">
+        <label for="priceHigh" class="form-label">High</label>
+        <input type="number" step="500" class="form-control" id="priceHigh" formControlName="limitHigh">
+      </ul>
+
+<!--      <ul class="navbar-nav me-auto mb-2 mb-lg-2">-->
+
+<!--        <label for="customRange2" class="form-label">Example range</label>-->
+<!--        <input type="range" class="form-range" min="0" max="100" id="customRange2">-->
+
+
+<!--      </ul>-->
+<!--      <ul class="navbar-nav me-auto mb-2 mb-lg-2">-->
+
+
+<!--        <label for="customRange3" class="form-label">Example range</label>-->
+<!--        <input type="range" class="form-range" min="0" max="100" id="customRange3">-->
+
+
+<!--      </ul>-->
 <!--      </form>-->
 
 
