@@ -1,0 +1,128 @@
+<form [formGroup]="form">
+  <div class="container">
+    <div class="accordion" id="accordionExample">
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Criterias
+          </button>
+        </h2>
+
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+
+            <app-select-dropdown formControlName="criteria" [data]="criterias"></app-select-dropdown>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Markets
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <ng-container [formGroup]="marketsFilter">
+              <div class="list-group">
+                <ng-container formArrayName="markets">
+                  <ng-container *ngFor="let mkt of markets.controls ; let i = index">
+                    <app-multiselect formControlName="{{i}}"></app-multiselect>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Filters, sorting and grouping
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+
+                  <div class="card">
+                    <div class="card-header">
+                      Price Filter
+                    </div>
+                    <div class="card-body">
+                      <ng-container formGroupName="priceLimits">
+                        <app-slider
+                          formControlName="minPrice"
+                          [min]=0
+                          [max]=200000
+                          [label]="minPriceLabel"
+                        >
+                        </app-slider>
+                        <app-slider
+                          formControlName="maxPrice"
+                          [min]=0
+                          [max]=200000
+                          [label]="maxPriceLabel"
+                        ></app-slider>
+                      </ng-container>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col">
+
+                  <div class="card">
+                    <div class="card-header">
+                      Sorting
+                    </div>
+                    <div class="card-body">
+                      <ng-container formGroupName="sorting">
+                        <input formControlName="sortOption" type="radio" class="btn-check" name="sortOption" value="byPrice" id="option5" autocomplete="off" checked>
+                        <label class="btn  btn-outline-primary" for="option5">By Price</label>
+
+                        <input formControlName="sortOption" type="radio" class="btn-check" name="sortOption" value="byAge" id="option6" autocomplete="off"  >
+                        <label class="btn  btn-outline-primary" for="option6">By Age</label>
+
+                        <input  formControlName="sortOption" type="radio" class="btn-check" name="sortOption" value="byLasChanged" id="option7" autocomplete="off" >
+                        <label class="btn  btn-outline-primary" for="option7">By Last Changed</label>
+
+                      </ng-container>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col">
+
+                  <div class="card">
+                    <div class="card-header">
+                      Grouping
+                    </div>
+                    <div class="card-body">
+                      <ng-container formGroupName="grouping">
+                        <input formControlName="groupOption" type="radio" class="btn-check" name="groupOption" value="discounted" id="option1" autocomplete="off" checked>
+                        <label class="btn" for="option1">Show discounted first</label>
+
+                        <input formControlName="groupOption" type="radio" class="btn-check" name="groupOption" value="none" id="option2" autocomplete="off" >
+                        <label class="btn" for="option2">Show ungrouped</label>
+                      </ng-container>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<app-ads-list [formData]="form" ></app-ads-list>
+

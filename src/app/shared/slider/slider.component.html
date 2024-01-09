@@ -1,0 +1,10 @@
+<form [formGroup]="form">
+
+  <div class="container">
+    <div class="col">
+      <input formControlName="value" min="{{min}}" max="{{max}}" (change)="onSlide($event)" type="range" class="form-range" value="0">
+      <label class="form-label">{{label}} <span id="timetext">{{valueStr}} &euro;</span></label>
+    </div>
+  </div>
+
+</form>
