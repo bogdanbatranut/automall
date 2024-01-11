@@ -14,6 +14,7 @@ export class AdModel {
   public Age : number
   public DiscountValue : number
   public DiscountPercent : number
+  public Thumbnail : string
 
   constructor(
     ID : number,
@@ -27,6 +28,7 @@ export class AdModel {
     Age : number,
     DiscountValue : number,
     DiscountPercent : number,
+    Thumbnail : string
   ) {
     this.ID = ID
     this.Brand = Brand
@@ -39,6 +41,7 @@ export class AdModel {
     this.Age = Age
     this.DiscountValue = DiscountValue
     this.DiscountPercent = DiscountPercent
+    this.Thumbnail = Thumbnail
     // this.DiscountValue = this.Prices[0].Price - this.Prices[this.Prices.length -1].Price
     // this.DiscountPercent = (this.Prices[0].Price - this.Prices[this.Prices.length -1].Price)/this.Prices[0].Price * 100
   }
