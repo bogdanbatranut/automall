@@ -13,8 +13,6 @@ export class QuerybinderDirective {
 
   ngOnInit() {
     const queryParams = new URLSearchParams(location.search);
-
-    console.log("queryParm: ", queryParams)
     if (queryParams.has(this.paramKey)) {
       this.ngControl.control?.patchValue(queryParams.get(this.paramKey));
     }

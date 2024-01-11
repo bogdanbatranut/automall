@@ -39,9 +39,11 @@ export class SelectDropdownComponent implements ControlValueAccessor{
   constructor() {
     this.data = []
     this.form = new FormGroup<any>({
-      selected : new FormControl({})
+      selected : new FormControl({}),
+      label : new FormControl("")
     })
     this.form.valueChanges.subscribe((value) => {
+
       this.onChange(value);
       this.onTouched();
     })

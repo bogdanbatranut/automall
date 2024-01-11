@@ -77,10 +77,8 @@ export class FilterComponent implements OnInit{
   }
 
   shareCheckedList(item:any[]){
-    console.log(item);
   }
   shareIndividualCheckedList(item:{}){
-    console.log(item);
   }
 
   criteriaChanged(val : number){

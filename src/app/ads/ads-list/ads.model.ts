@@ -25,7 +25,8 @@ export class AdModel {
     Year : number,
     Km : number,
     Age : number,
-
+    DiscountValue : number,
+    DiscountPercent : number,
   ) {
     this.ID = ID
     this.Brand = Brand
@@ -36,8 +37,10 @@ export class AdModel {
     this.Year = Year
     this.Km = Km
     this.Age = Age
-    this.DiscountValue = this.Prices[0].Price - this.Prices[this.Prices.length -1].Price
-    this.DiscountPercent = (this.Prices[0].Price - this.Prices[this.Prices.length -1].Price)/this.Prices[0].Price * 100
+    this.DiscountValue = DiscountValue
+    this.DiscountPercent = DiscountPercent
+    // this.DiscountValue = this.Prices[0].Price - this.Prices[this.Prices.length -1].Price
+    // this.DiscountPercent = (this.Prices[0].Price - this.Prices[this.Prices.length -1].Price)/this.Prices[0].Price * 100
   }
 
 

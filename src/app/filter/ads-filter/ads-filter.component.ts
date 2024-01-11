@@ -28,6 +28,7 @@ export class AdsFilterComponent {
 
   form : FormGroup<any>
   criterias : {id : number, label : string}[]
+  selectedCriteriasLabel : string = ""
 
   get markets() {
     return this.form.get("marketsFilter")!.get("markets") as FormArray
@@ -72,7 +73,7 @@ export class AdsFilterComponent {
 
   buildForm() : FormGroup {
     let form = new FormGroup({
-      criteria : new FormControl<{selected : number}>({selected : 0}),
+      criteria : new FormControl<{selected : number, label : string}>({selected : 0, label : ""}),
       marketsFilter : new FormGroup({
         markets : new FormArray([
         ])
@@ -82,7 +83,8 @@ export class AdsFilterComponent {
         maxPrice : new FormControl(0)
       }),
       sorting : new FormGroup({
-        sortOption : new FormControl('byPrice')
+        sortOption : new FormControl('byPrice'),
+        sortDirection : new FormControl('asc')
       }),
       grouping : new FormGroup({
         groupOption : new FormControl('discounted')

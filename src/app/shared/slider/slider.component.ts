@@ -41,7 +41,6 @@ export class SliderComponent implements ControlValueAccessor{
     this.form.valueChanges.subscribe((value) => {
       this.onChange(value);
       this.onTouched();
-      console.log(String(value.value))
       if (value.value) {
         this.valueStr = Number(value.value).toLocaleString("ro-RO")
       }
@@ -61,7 +60,6 @@ export class SliderComponent implements ControlValueAccessor{
   }
 
   writeValue(obj: any): void {
-    console.log("Slider writeValue: ", obj)
   }
 
 

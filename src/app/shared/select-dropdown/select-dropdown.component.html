@@ -1,5 +1,8 @@
 <form [formGroup]="form">
   <select formControlName="selected" class="form-select" aria-label="Default select example">
-    <option *ngFor="let opt of data ; index as i" value={{opt.id}}>{{opt.label}}</option>
+    <ng-container *ngFor="let opt of data ; index as i">
+      <option value={{opt.id}}>{{opt.label}}</option>
+    </ng-container>
+<!--    <option *ngFor="let opt of data ; index as i" value={{opt.id}}>{{opt.label}}</option>-->
   </select>
 </form>

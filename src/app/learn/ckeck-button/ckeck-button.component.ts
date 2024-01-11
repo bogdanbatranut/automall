@@ -50,7 +50,6 @@ export class CkeckButtonComponent implements ControlValueAccessor{
   }
 
   writeValue(obj: any): void {
-    console.log("writeValue: ", obj)
     this.form.setValue(obj)
   }
 

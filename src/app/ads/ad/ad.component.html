@@ -12,7 +12,7 @@
           <h5 *ngIf="ad.DiscountValue != 0">Discount value: {{ad.DiscountValue.toLocaleString("ro-RO")}} &euro;  </h5>
           <h5 class="card-title"> {{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} &euro; </h5>
           <h5 class="card-title">{{ad.Brand}} {{ad.CarModel}} {{ad.Year}} {{ad.Km.toLocaleString("ro-RO")}} Km</h5>
-          <p class="card-text">Published : {{ad.Age}} days ago</p>
+          <p class="card-text">First seen : {{ad.Age}} days ago</p>
           <div *ngFor="let price of ad.Prices ; index as i">
             <p class="card-text">&euro; {{price.Price.toLocaleString("ro-RO")}} {{price.CreatedAt}}</p>
           </div>

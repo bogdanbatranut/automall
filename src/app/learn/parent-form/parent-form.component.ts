@@ -23,7 +23,6 @@ export class ParentFormComponent {
     })
 
     this.form.valueChanges.subscribe((value) => {
-      console.log("master form value changed: ", this.form.value)
     })
   }
 }

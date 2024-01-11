@@ -5,7 +5,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Criterias
+            Criterias {{selectedCriteriasLabel}}
           </button>
         </h2>
 
@@ -83,15 +83,29 @@
                     </div>
                     <div class="card-body">
                       <ng-container formGroupName="sorting">
-                        <input formControlName="sortOption" type="radio" class="btn-check" name="sortOption" value="byPrice" id="option5" autocomplete="off" checked>
-                        <label class="btn  btn-outline-primary" for="option5">By Price</label>
+                        <div class="col">
+                          <input formControlName="sortOption" type="radio" class="btn-check" name="sortOption" value="byPrice" id="option5" autocomplete="off" checked>
+                          <label class="btn  btn-outline-primary" for="option5">By Price</label>
 
-                        <input formControlName="sortOption" type="radio" class="btn-check" name="sortOption" value="byAge" id="option6" autocomplete="off"  >
-                        <label class="btn  btn-outline-primary" for="option6">By Age</label>
+                          <input formControlName="sortOption" type="radio" class="btn-check" name="sortOption" value="byDiscount" id="option8" autocomplete="off" checked>
+                          <label class="btn  btn-outline-primary" for="option8">By Discount</label>
 
-                        <input  formControlName="sortOption" type="radio" class="btn-check" name="sortOption" value="byLasChanged" id="option7" autocomplete="off" >
-                        <label class="btn  btn-outline-primary" for="option7">By Last Changed</label>
+                          <input formControlName="sortOption" type="radio" class="btn-check" name="sortOption" value="byDiscountPercent" id="option9" autocomplete="off" checked>
+                          <label class="btn  btn-outline-primary" for="option9">By Discount %</label>
 
+                          <input formControlName="sortOption" type="radio" class="btn-check" name="sortOption" value="byAge" id="option6" autocomplete="off"  >
+                          <label class="btn  btn-outline-primary" for="option6">By Age</label>
+
+                          <input  formControlName="sortOption" type="radio" class="btn-check" name="sortOption" value="byLastChanged" id="option7" autocomplete="off" >
+                          <label class="btn  btn-outline-primary" for="option7">By Last Changed</label>
+                        </div>
+                        <div class="col">
+                          <input formControlName="sortDirection" type="radio" class="btn-check" name="sortDirection" value="asc" id="sortDirectionAsc" autocomplete="off" checked>
+                          <label class="btn" for="sortDirectionAsc">Ascending</label>
+
+                          <input formControlName="sortDirection" type="radio" class="btn-check" name="sortDirection" value="desc" id="sortDirectionDesc" autocomplete="off" >
+                          <label class="btn" for="sortDirectionDesc">Descending</label>
+                        </div>
                       </ng-container>
                     </div>
                   </div>

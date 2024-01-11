@@ -41,25 +41,6 @@ export class AdsListComponent implements OnInit{
 
   ngOnInit(): void {
 
-    // this.formData.valueChanges.subscribe(val =>
-    //   {
-    //     this.ads$ = this.adsService.getAds(val).pipe(
-    //       map(res => {
-    //         return res.Data.map(ad  => {
-    //           return new AdModel(
-    //             ad.ID, ad.Brand, ad.CarModel, ad.Ad_url,
-    //             ad.Prices.map(price => {
-    //               return new Price(price.ID, price.Price, (new Date(price.CreatedAt).toLocaleDateString("ro-RO")))
-    //             }),
-    //             ad.Market, ad.Year, ad.Km, ad.Age
-    //           )
-    //         })
-    //       })
-    //     )
-    //
-    //   }
-    // )
-
     this.formData.valueChanges.subscribe(
       val => {
         this.ads$ = this.adsService.getAds(val).pipe(
@@ -72,40 +53,14 @@ export class AdsListComponent implements OnInit{
                   ad.Prices.map(price => {
                     return new Price(price.ID, price.Price, (new Date(price.CreatedAt).toLocaleDateString("ro-RO")))
                   }),
-                  ad.Market, ad.Year, ad.Km, ad.Age
+                  ad.Market, ad.Year, ad.Km, ad.Age, ad.DiscountValue, ad.DiscountPercent
                 )
               }
-            ).sort(this.sortByDiscount)
+            )// .sort(this.sortByDiscount)
           }),
         )
       }
     )
-
-
-    // this.formData.valueChanges.subscribe(val =>
-    //   {
-    //     this.adsService.getAds(val).pipe(
-    //
-    //     ).subscribe(val => console.log(val))
-    //
-    //   }
-    // )
-
-    // this.route.params.subscribe(value => {
-    //   this.criteriaId = value['id']
-    // })
-
-      // this.route.params.subscribe(value => {
-      //   this.ads$ = this.criteriasService.getAdsForCriteriaId(value['id']).pipe(
-      //     map(res => {
-      //       return res.Data.map(ad => {return new AdModel(ad.ID, ad.Brand, ad.CarModel, ad.Ad_url,
-      //         ad.Prices.map(price => { return new Price(price.ID, price.Price, (new Date(price.CreatedAt).toLocaleDateString("ro-RO")))
-      //         }),ad.Market, ad.Year, ad.Km, ad.Age
-      //         )
-      //       })
-      //     })
-      //   )
-      // })
     }
 
 }
