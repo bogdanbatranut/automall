@@ -1,33 +1,22 @@
 import { Component } from '@angular/core';
 import {ScrapeService} from "../scrape.service";
+import {ReactiveFormsModule} from "@angular/forms";
+import { NgIf } from "@angular/common";
 
 @Component({
   selector: 'app-scrape-start',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './scrape-start.component.html',
   styleUrl: './scrape-start.component.css'
 })
 export class ScrapeStartComponent {
 
-  showToast : boolean = false
-  toastMessage : string = ""
-
   constructor(private sservice : ScrapeService) {
   }
 
   startScraping() {
-    this.sservice.startScrape().pipe().subscribe(res => this.showToast(res) )
-
-  }
-
-  closeToast(){
-    this.showToast = false
-  }
-
-  showToast(message : string) {
-    this.toastMessage = message
-    this.showToast = true
+    this.sservice.startScrape().pipe().subscribe()
   }
 
 }
