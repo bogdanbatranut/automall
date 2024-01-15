@@ -2,18 +2,12 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map, Observable, Subscription, tap} from "rxjs";
 import {FormGroup} from "@angular/forms";
-
-export interface ScrapeStartResponse {
-  Data : string
-}
+import {Respose, ScrapeStartResponse} from "./data.models";
 
 @Injectable({
   providedIn: 'root'
 })
 
-export interface Respose {
-  Data : string
-}
 
 export class ScrapeService {
 
