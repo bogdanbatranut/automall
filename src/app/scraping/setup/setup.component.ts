@@ -48,6 +48,8 @@ export class SetupComponent {
     return this.form.get("criterias") as FormArray
   }
 
+  response = ""
+
   getData() {
     console.log("???? ");
     const self = this;
@@ -109,7 +111,7 @@ export class SetupComponent {
   }
 
   formValueChanged(){
-    this.scrapeService.activateScrapeMarketsAndCriterias(this.form.value).subscribe()
+    this.scrapeService.activateScrapeMarketsAndCriterias(this.form.value).subscribe(val => {this.response = val})
   }
 
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {map, Observable, tap} from "rxjs";
+import {map, Observable, Subscription, tap} from "rxjs";
 import {FormGroup} from "@angular/forms";
 
 export interface ScrapeStartResponse {
@@ -10,6 +10,10 @@ export interface ScrapeStartResponse {
 @Injectable({
   providedIn: 'root'
 })
+
+export interface Respose {
+  Data : string
+}
 
 export class ScrapeService {
 
@@ -27,12 +31,12 @@ export class ScrapeService {
     )
   }
 
-  activateScrapeMarketsAndCriterias(form : any) : Observable<any> {
+  activateScrapeMarketsAndCriterias(form : any) : Observable<string> {
 
     let url = this.prodDomain + "/marketsAndCriterias"
 
-    return this.http.post<any>(url, form).pipe(
-      tap(response => {console.log(response)})
+    return this.http.post<Respose>(url, form).pipe(
+        map(res => {return res.Data})
     )
   }
 }
