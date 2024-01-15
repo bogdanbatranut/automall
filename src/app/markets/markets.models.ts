@@ -5,4 +5,5 @@ export interface MarketsModelResponse {
 export interface Market {
   ID : number
   Name : string
+  AllowProcess : boolean
 }

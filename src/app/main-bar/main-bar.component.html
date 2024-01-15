@@ -22,18 +22,18 @@
             Scraping
           </a>
           <ul class="dropdown-menu" aria-labelledby="scrapingDropdown">
-            <app-scrape-start></app-scrape-start>
+            <li>
+              Start: <app-scrape-start></app-scrape-start>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['scraping-setup']" routerLinkActive="active" ariaCurrentWhenActive="page">Scraping Setup</a>
+            </li>
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="logDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Scraping logs
           </a>
-          <ul class="dropdown-menu" aria-labelledby="logDropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="Scrape_sessions" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Scrape sessions
-            </a>
-          </ul>
         </li>
       </ul>
     </div>

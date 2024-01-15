@@ -2,10 +2,12 @@ export class CriteriaModel {
   public ID : number
   public brand : string
   public carModel : string
-  public yearFrom : number
-  public yearTo : number
-  public kmFrom : number
-  public kmTo : number
+  public YearFrom : number
+  public YearTo : number
+  public KmFrom : number
+  public KmTo : number
+  public AllowProcess : boolean
+  public Fuel : string
 
   constructor(  ID : number,
    brand : string,
@@ -13,13 +15,18 @@ export class CriteriaModel {
    yearFrom : number,
    yearTo : number,
    kmFrom : number,
-   kmTo : number) {
+   kmTo : number,
+   allowProcess : boolean,
+   fuel : string
+  ) {
     this.ID = ID
     this.brand = brand
     this.carModel = carModel
-    this.yearFrom = yearFrom
-    this.yearTo = yearTo
-    this.kmFrom = kmFrom
-    this.kmTo = kmTo
+    this.YearFrom = yearFrom
+    this.YearTo = yearTo
+    this.KmFrom = kmFrom
+    this.KmTo = kmTo
+    this.AllowProcess = allowProcess
+    this.Fuel = fuel
   }
 }
