@@ -17,8 +17,8 @@ export interface Respose {
 
 export class ScrapeService {
 
-  devDomain = "http://localhost:8080"
-  prodDomain = "http://dev.auto-mall.ro:8080"
+  // domain = "http://localhost:8080"
+  domain = "http://dev.auto-mall.ro:8080"
 
   constructor(private http : HttpClient) { }
 
@@ -33,7 +33,7 @@ export class ScrapeService {
 
   activateScrapeMarketsAndCriterias(form : any) : Observable<string> {
 
-    let url = this.prodDomain + "/marketsAndCriterias"
+    let url = this.domain + "/marketsAndCriterias"
 
     return this.http.post<Respose>(url, form).pipe(
         map(res => {return res.Data})

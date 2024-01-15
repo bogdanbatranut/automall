@@ -26,7 +26,6 @@ export class SetupComponent {
   requests  = [
     this.marketsService.getMarkets().pipe(
       map( mkts => {
-        console.log("mkts : ", mkts)
         return mkts
       })
     ),
@@ -51,7 +50,6 @@ export class SetupComponent {
   response = ""
 
   getData() {
-    console.log("???? ");
     const self = this;
       forkJoin(this.requests)
         .pipe(
