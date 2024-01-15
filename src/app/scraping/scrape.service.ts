@@ -29,7 +29,7 @@ export class ScrapeService {
 
   activateScrapeMarketsAndCriterias(form : any) : Observable<any> {
 
-    let url = this.devDomain + "/marketsAndCriterias"
+    let url = this.prodDomain + "/marketsAndCriterias"
 
     return this.http.post<any>(url, form).pipe(
       tap(response => {console.log(response)})
