@@ -11,8 +11,8 @@ import {Respose, ScrapeStartResponse} from "./data.models";
 
 export class ScrapeService {
 
-  // domain = "http://localhost:8080"
-  domain = "http://dev.auto-mall.ro:8080"
+  domain = "http://127.0.0.1:8080"
+  // domain = "http://dev.auto-mall.ro:8080"
 
   constructor(private http : HttpClient) { }
 
@@ -27,10 +27,10 @@ export class ScrapeService {
 
   activateScrapeMarketsAndCriterias(form : any) : Observable<string> {
 
-    const headerss = { 'Content-Type': 'application/json'};
+    // const headerss = { 'Content-Type': 'application/json'};
     let url = this.domain + "/marketsAndCriterias"
-
-    return this.http.post<Respose>(url, form, {headers : headerss}).pipe(
+    let ff = JSON.stringify(form)
+    return this.http.post<Respose>(url, ff).pipe(
         map(res => {return res.Data})
     )
   }
