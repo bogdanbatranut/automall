@@ -27,9 +27,10 @@ export class ScrapeService {
 
   activateScrapeMarketsAndCriterias(form : any) : Observable<string> {
 
+    const headerss = { 'Content-Type': 'application/json'};
     let url = this.domain + "/marketsAndCriterias"
 
-    return this.http.post<Respose>(url, form).pipe(
+    return this.http.post<Respose>(url, form, {headers : headerss}).pipe(
         map(res => {return res.Data})
     )
   }
