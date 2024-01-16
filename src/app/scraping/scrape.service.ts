@@ -11,8 +11,8 @@ import {Respose, ScrapeStartResponse} from "./data.models";
 
 export class ScrapeService {
 
-  domain = "http://127.0.0.1:8080"
-  // domain = "http://dev.auto-mall.ro:8080"
+  // domain = "http://127.0.0.1:8080"
+  domain = "http://dev.auto-mall.ro:8080"
 
   constructor(private http : HttpClient) { }
 
