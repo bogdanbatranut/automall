@@ -31,7 +31,6 @@ export class SetupComponent {
     ),
     this.criteriasService.getCriterias().pipe(
       map( crts => {
-        // console.log("crts : ", crts)
         return crts
       })
     )
@@ -64,7 +63,7 @@ export class SetupComponent {
                 self.markets.push(
                   new FormControl(
                     {
-                      id: mkt.ID, selected: mkt.AllowProcess, label: mkt.Name
+                      id: mkt.ID, checked: mkt.AllowProcess, label: mkt.Name
                     }
                   )
                 )
@@ -73,7 +72,7 @@ export class SetupComponent {
             self.criterias.push(
               new FormControl(
                 {
-                  id: crt.ID, selected: crt.AllowProcess, label: self.createCriteriasLabel(crt)
+                  id: crt.ID, checked: crt.AllowProcess, label: self.createCriteriasLabel(crt)
                 }
               )
             )

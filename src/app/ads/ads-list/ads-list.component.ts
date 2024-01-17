@@ -56,7 +56,7 @@ export class AdsListComponent implements OnInit{
                   ad.Market, ad.Year, ad.Km, ad.Age, ad.DiscountValue, ad.DiscountPercent, ad.Thumbnail
                 )
               }
-            )// .sort(this.sortByDiscount)
+            )
           }),
         )
       }

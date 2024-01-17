@@ -60,6 +60,7 @@ export class SliderComponent implements ControlValueAccessor{
   }
 
   writeValue(obj: any): void {
+    this.form.patchValue(obj)
   }
 
 

@@ -79,8 +79,8 @@ export class AdsFilterComponent {
         ])
       }),
       priceLimits : new FormGroup({
-        minPrice : new FormControl(0),
-        maxPrice : new FormControl(0)
+        minPrice : new FormControl<{value : number}>({value : 0}),
+        maxPrice : new FormControl<{value : number}>({value : 50000}),
       }),
       sorting : new FormGroup({
         sortOption : new FormControl('byPrice'),

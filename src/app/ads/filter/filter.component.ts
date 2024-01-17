@@ -43,7 +43,7 @@ export class FilterComponent implements OnInit{
     sortOption : ["byPrice", [Validators.required]],
     sortOptionDirection : ["asc", [Validators.required]],
     filters : this.multiFilterArr,
-    limitLow : new FormControl(0),
+    limitLow : new FormControl(null),
     limitHigh : new FormControl(null),
     }
   )
@@ -58,12 +58,10 @@ export class FilterComponent implements OnInit{
     private router : Router
     ) {
 
-    // this.filterForm.valueChanges.subscribe(val => {console.log(" -----  ", val)})
 
     this.markets = this.marketsService.getMarkets().pipe(
       map(markets => {
         markets.map(
-          // market =>  (<FormArray>this.filterForm.get("filters")).push(new FormControl({id : market.ID, name : market.Name, checked : false}))
           market =>  (<FormArray>this.filterForm.get("filters")).push(new FormGroup({
             checked : new FormControl(false),
             id : new FormControl( market.ID )
