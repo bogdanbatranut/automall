@@ -1,6 +1,32 @@
+<!--Loading : {{isLoading}}-->
+<!--<pre>-->
+<!--  {{formData.value | json}}-->
+<!--</pre>-->
+
 <ng-container>
-  <div *ngFor="let ad of ads$ | async; index as i">
-    <app-ad [ad] = ad></app-ad>
-    <hr class="hr" />
+
+<!--  <div class="container" *ngIf="!isLoading ; else loadingTemplate">-->
+  <div class="container" *ngIf="!isLoading ; else loadingTemplate">
+        <div *ngFor="let ad of ads; index as i">
+          <app-ad [ad] = ad></app-ad>
+          <hr class="hr" />
+        </div>
   </div>
+
+
 </ng-container>
+
+<ng-template #loadingTemplate>
+
+  <div class="container">
+    <div class="row gy-5">
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status" style="width: 7rem; height: 7rem;">
+<!--          <span class="sr-only">Loading...</span>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-template>
+

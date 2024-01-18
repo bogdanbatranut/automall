@@ -1,0 +1,12 @@
+<div class="toast-container position-absolute bottom-0 start-50 translate-middle-x">
+ <ng-container *ngFor="let toast of toasts; index as i">
+   <app-toast
+     [message]="toast.message"
+     [isErr]="toast.isErr"
+     [index]="i"
+     (removeItem)="removeToast($event)"
+   >
+
+   </app-toast>
+ </ng-container>
+</div>

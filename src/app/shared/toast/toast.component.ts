@@ -1,24 +1,30 @@
-import { Component } from '@angular/core';
-import { NgIf } from "@angular/common";
+import {Component, EventEmitter, HostBinding, Input, Output, Renderer2} from '@angular/core';
+import {CommonModule, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-toast',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf,
+    CommonModule],
   templateUrl: './toast.component.html',
   styleUrl: './toast.component.css'
 })
 export class ToastComponent {
-  show : boolean = false
-  toastMessage : string = "no response yet"
+  @Input() isErr = false
+  @Input() message = ""
+  @Input() index = -1
 
-  showToast(message : string) {
-    this.toastMessage = message
-    this.show = true
+  @Output() removeItem = new EventEmitter<number>();
+
+  constructor() {
   }
 
-  closeToast(){
-    this.show = false
+  showToast(message : string, type :string) {
+    this.isErr = false
+  }
+
+  closeToast(index : number){
+    this.removeItem.emit(index)
   }
 
 }
