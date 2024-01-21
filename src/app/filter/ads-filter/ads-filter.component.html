@@ -99,10 +99,10 @@
                           <label class="btn  btn-outline-primary" for="option9">By Discount %</label>
 
                           <input formControlName="sortOption" type="radio" class="btn-check" name="sortOption" value="byAge" id="option6" autocomplete="off"  >
-                          <label class="btn  btn-outline-primary" for="option6">By Age</label>
+                          <label class="btn  btn-outline-primary" for="option6">By Ad Age</label>
 
                           <input  formControlName="sortOption" type="radio" class="btn-check" name="sortOption" value="byLastChanged" id="option7" autocomplete="off" >
-                          <label class="btn  btn-outline-primary" for="option7">By Last Changed</label>
+                          <label class="btn  btn-outline-primary" for="option7">By Last Price Change</label>
                         </div>
                         <div class="col">
                           <input formControlName="sortDirection" type="radio" class="btn-check" name="sortDirection" value="asc" id="sortDirectionAsc" autocomplete="off" checked>
@@ -144,6 +144,9 @@
 </form>
 
 <div class="overflow-auto">
-  <app-ads-list [formData]="form" ></app-ads-list>
+  <app-ads-list
+    [formData]="form"
+    (selectedPageEvent)="pageSelected($event)"
+  ></app-ads-list>
 </div>
 

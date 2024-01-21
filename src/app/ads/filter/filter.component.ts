@@ -45,6 +45,8 @@ export class FilterComponent implements OnInit{
     filters : this.multiFilterArr,
     limitLow : new FormControl(null),
     limitHigh : new FormControl(null),
+    page : new FormControl(1),
+    limit : new FormControl(50)
     }
   )
 

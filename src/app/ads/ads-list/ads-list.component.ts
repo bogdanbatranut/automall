@@ -1,13 +1,25 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CriteriasService} from "../../criterias/criterias.service";
 import {ActivatedRoute} from "@angular/router";
-import {filter, map, Observable, tap} from "rxjs";
-import {AdModel, Price} from "./ads.model";
+import {
+  BehaviorSubject,
+  concat,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  Observable,
+  of,
+  switchMap,
+  tap
+} from "rxjs";
+import {AdModel, Pagination, Price} from "./ads.model";
 import {AsyncPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {AdComponent} from "../ad/ad.component";
 import {AdsService} from "../ads.service";
 import {FormGroup} from "@angular/forms";
 import {ToastService} from "../../services/toast.service";
+import {PaginationComponent} from "../../shared/pagination/pagination.component";
 
 @Component({
   selector: 'app-ads-list',
@@ -18,15 +30,22 @@ import {ToastService} from "../../services/toast.service";
     NgForOf,
     JsonPipe,
     NgIf,
+    PaginationComponent,
   ],
   templateUrl: './ads-list.component.html',
   styleUrl: './ads-list.component.css'
 })
 export class AdsListComponent implements OnInit{
   @Input() formData : FormGroup = new FormGroup<any>({})
+
+  @Output() selectedPageEvent = new EventEmitter<number>()
+
   ads$ : Observable<AdModel[]>
   ads : AdModel[] = []
   criteriaId : number = 0
+
+  loadAdsStream$ = new BehaviorSubject('')
+  obs$ : Observable<any> = new Observable<any>()
 
   isLoading : boolean = false
   test : string = "init val"
@@ -53,34 +72,68 @@ export class AdsListComponent implements OnInit{
 
   ngOnInit(): void {
 
-    const self = this
-    this.formData.valueChanges.subscribe(value => {
-      self.ads = []
-      self.isLoading = true;
-      self.test = "loading..."
-      this.adsService.getAds(value).subscribe(response => {
-        self.isLoading = false;
-        self.test = "done loading"
-        if (response.Data != null ){
-          response.Data.forEach(function (ad) {
-            self.ads.push(
-              new AdModel(
-                ad.ID, ad.Brand, ad.CarModel, ad.Ad_url,
-                ad.Prices.map(price => {
-                  return new Price(price.ID, price.Price, (new Date(price.CreatedAt).toLocaleDateString("ro-RO")))
-                }),
-                ad.Market, ad.Year, ad.Km, ad.Age, ad.DiscountValue, ad.DiscountPercent, ad.Thumbnail
-              )
+    this.formData.valueChanges.pipe(
+      debounceTime(200)
+    )
+      .subscribe(value => {
+      this.obs$ = this.loadAdsStream$.pipe(
+        distinctUntilChanged(),
+        switchMap( (query) =>
+          concat(
+            of({loading : true, pagination : Pagination, ads : []}),
+            this.adsService.getAds(value).pipe(
+              map(response => {
+                return { Ads:  response.Data.Ads , Pagination : response.Data.Pagination}
+              }),
+              map(data => {
+                return {
+                  loading: false,
+                  pagination : data.Pagination,
+                  ads : data.Ads==null ? [] : data.Ads.map(ad => {
+                  return new AdModel(
+                    ad.ID, ad.Brand, ad.CarModel, ad.Ad_url,
+                    ad.Prices.map(price => {
+                      return new Price(price.ID, price.Price, (new Date(price.CreatedAt).toLocaleDateString("ro-RO")))
+                    }),
+                    ad.Market, ad.Year, ad.Km, ad.Age, ad.DiscountValue, ad.DiscountPercent, ad.Thumbnail
+                  )
+                })
+              }
+              })
             )
-          })
-        }else {
-          this.toastService.showToast(true, "There are no cars for this criteria... please change criteria.")
-        }
-      })
+          )
+        )
+      );
     })
 
+    // const self = this
+    // this.formData.valueChanges.subscribe(value => {
+    //   self.ads = []
+    //   self.isLoading = true;
+    //   self.test = "loading..."
+    //   this.adsService.getAds(value).subscribe(response => {
+    //     self.isLoading = false;
+    //     self.test = "done loading"
+    //     if (response.Data != null ){
+    //       response.Data.forEach(function (ad) {
+    //         self.ads.push(
+    //           new AdModel(
+    //             ad.ID, ad.Brand, ad.CarModel, ad.Ad_url,
+    //             ad.Prices.map(price => {
+    //               return new Price(price.ID, price.Price, (new Date(price.CreatedAt).toLocaleDateString("ro-RO")))
+    //             }),
+    //             ad.Market, ad.Year, ad.Km, ad.Age, ad.DiscountValue, ad.DiscountPercent, ad.Thumbnail
+    //           )
+    //         )
+    //       })
+    //     }else {
+    //       this.toastService.showToast(true, "There are no cars for this criteria... please change criteria.")
+    //     }
+    //   })
+    // })
+
     // this.formData.valueChanges.subscribe(val => {
-    //     this.isLoading = true
+    //   this.isLoading = true
     //   this.test = "1"
     //     this.ads$ = this.adsService.getAds(val).pipe(
     //       map(response => {
@@ -107,6 +160,11 @@ export class AdsListComponent implements OnInit{
     // );
 
 
+
   }
 
+
+  pageSelected(page : number) {
+    this.selectedPageEvent.emit(page)
+  }
 }

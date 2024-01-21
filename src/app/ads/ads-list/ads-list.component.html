@@ -1,16 +1,28 @@
 <!--Loading : {{isLoading}}-->
 <!--<pre>-->
 <!--  {{formData.value | json}}-->
+
 <!--</pre>-->
 
 <ng-container>
 
 <!--  <div class="container" *ngIf="!isLoading ; else loadingTemplate">-->
-  <div class="container" *ngIf="!isLoading ; else loadingTemplate">
-        <div *ngFor="let ad of ads; index as i">
+  <div class="container" *ngIf="obs$ | async as obs">
+    <div *ngIf="!obs.loading ; else loadingTemplate">
+
+      <app-pagination *ngIf="obs.pagination.total_pages > 1"
+        [selectedPage]="obs.pagination.page"
+        [totalPages]="obs.pagination.total_pages"
+        (selectedPageEvent)="pageSelected($event)"
+      ></app-pagination>
+
+        <div *ngFor="let ad of obs.ads; index as i">
           <app-ad [ad] = ad></app-ad>
           <hr class="hr" />
         </div>
+
+    </div>
+
   </div>
 
 

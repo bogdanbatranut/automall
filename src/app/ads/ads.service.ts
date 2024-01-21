@@ -8,8 +8,8 @@ import {AdModelResponse} from "./ads-list/ads.model";
 })
 export class AdsService {
 
-  adsURL = "http://dev.auto-mall.ro"
-// adsURL = "http://127.0.0.1"
+  // adsURL = "http://dev.auto-mall.ro"
+adsURL = "http://127.0.0.1"
 
   constructor( private http : HttpClient
   ) { }
@@ -22,6 +22,8 @@ export class AdsService {
     params = params.append("limitLow", form.priceLimits.minPrice.value)
     params = params.append("limitHigh", form.priceLimits.maxPrice.value)
     params = params.append("groupingOption", form.grouping.groupOption)
+    params = params.append("limit", form.limit)
+    params = params.append("page", form.page)
 
     let marketsList : number[] = [];
     let marketList : [{checked : boolean, id : number}] = form.marketsFilter.markets
@@ -34,7 +36,7 @@ export class AdsService {
     )
 
     params = params.append("markets", marketsList.join(","))
-    let finalURL = this.adsURL + ":8080/adsforcriteria/" + criteriaId
+    let finalURL = this.adsURL + ":8080/adsforcriteriaPaginated/" + criteriaId
     return this.http.get<any>(finalURL, {params : params})
   }
 

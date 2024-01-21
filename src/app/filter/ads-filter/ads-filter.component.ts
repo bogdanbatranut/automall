@@ -45,6 +45,7 @@ export class AdsFilterComponent {
     private criteriasService : CriteriasService,
     private marketsService : MarketsService
     ) {
+
     this.form = this.buildForm()
     this.criterias = [{id : 0 , label : ""}]
     this.criteriasService.getCriterias().subscribe(
@@ -88,9 +89,19 @@ export class AdsFilterComponent {
       }),
       grouping : new FormGroup({
         groupOption : new FormControl('discounted')
-      })
+      }),
+      page: new FormControl(1),
+      limit: new FormControl(50)
+
     })
     return  form
+  }
+
+  pageSelected(page : number){
+    let oldSelectedPage = this.form.get("page")?.value
+    if (page != oldSelectedPage){
+      this.form.get("page")?.patchValue(page)
+    }
   }
 
 }

@@ -1,5 +1,29 @@
 export interface AdModelResponse {
-  Data : AdModel[]
+  Data : ResponseData
+}
+
+export class ResponseData {
+  public Ads : AdModel[]
+  public Pagination : Pagination
+
+  constructor(Ads : AdModel[], Pagination : Pagination) {
+    this.Ads = Ads
+    this.Pagination = Pagination
+  }
+}
+
+export class Pagination {
+  public limit : number
+  public page : number
+  public total_rows : number
+  public total_pages : number
+
+  constructor(limit : number, page : number, total_rows : number, total_pages : number) {
+    this.limit = limit
+    this.page = page
+    this.total_rows = total_rows
+    this.total_pages = total_pages
+  }
 }
 
 export class AdModel {
