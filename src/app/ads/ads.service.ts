@@ -8,8 +8,8 @@ import {AdModelResponse} from "./ads-list/ads.model";
 })
 export class AdsService {
 
-  // adsURL = "http://dev.auto-mall.ro"
-adsURL = "http://127.0.0.1"
+  adsURL = "http://dev.auto-mall.ro"
+// adsURL = "http://127.0.0.1"
 
   constructor( private http : HttpClient
   ) { }
