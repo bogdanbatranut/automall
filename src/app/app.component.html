@@ -1,13 +1,24 @@
 <!--<router-outlet></router-outlet>-->
 <!--<app-filter></app-filter>-->
-<app-main-bar>
+<app-autocomplete>
 
-</app-main-bar>
-<ng-container>
+</app-autocomplete>
+<ng-container *ngIf="isDev">
   <router-outlet>
 
   </router-outlet>
+
 </ng-container>
-<ng-container>
-  <app-toasts-container></app-toasts-container>
-</ng-container>
+
+<ng-template #app>
+  <app-main-bar>
+  </app-main-bar>
+  <ng-container>
+    <router-outlet>
+    </router-outlet>
+  </ng-container>
+  <ng-container>
+    <app-toasts-container></app-toasts-container>
+  </ng-container>
+</ng-template>
+
