@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {JsonPipe} from "@angular/common";
+import {AutocompleteComponent} from "../../shared/autocomplete/autocomplete.component";
 
 export interface RegisterForm {
   firstName : FormControl<string>,
@@ -14,7 +15,8 @@ export interface RegisterForm {
   standalone: true,
   imports: [
     JsonPipe,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AutocompleteComponent
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
