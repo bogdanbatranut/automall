@@ -1,10 +1,4 @@
-<!--<router-outlet></router-outlet>-->
-<!--<app-filter></app-filter>-->
-
-
-
-
-<ng-container *ngIf="isDev">
+<ng-container *ngIf="isDev; else app">
   <router-outlet>
 
   </router-outlet>

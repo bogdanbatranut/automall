@@ -19,5 +19,5 @@ import {AutocompleteComponent} from "./shared/autocomplete/autocomplete.componen
 export class AppComponent {
   title = 'automall';
 
-  isDev : boolean = true
+  isDev : boolean = false
 }
