@@ -2,8 +2,8 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import {catchError, throwError} from "rxjs";
 
 export const httpInterceptor: HttpInterceptorFn = (req, next) => {
-  // console.log("IN functional interceptor")
-  // return next(req);
+  // console.log("IN unctional interceptor")
+  // return next(r;
   return next(req).pipe(
     catchError(
       (error) => {
