@@ -28,6 +28,7 @@ export class Pagination {
 
 export class AdModel {
   public ID : number
+  public Title : string
   public Brand : string
   public CarModel : string
   public Ad_url : string
@@ -42,6 +43,7 @@ export class AdModel {
 
   constructor(
     ID : number,
+    Title : string,
     Brand : string,
     CarModel : string,
     Ad_url : string,
@@ -55,6 +57,7 @@ export class AdModel {
     Thumbnail : string
   ) {
     this.ID = ID
+    this.Title = Title
     this.Brand = Brand
     this.CarModel = CarModel
     this.Ad_url = Ad_url
