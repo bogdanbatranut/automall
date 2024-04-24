@@ -51,7 +51,7 @@ export class AdsFilterComponent {
     this.criteriasService.getCriterias().subscribe(
       value => {
         value.map(cr => {
-          this.criterias.push({id : cr.ID, label : cr.brand + " " + cr.carModel})
+          this.criterias.push({id : cr.ID, label : cr.brand + " " + cr.carModel + " " + cr.YearFrom + "-" + cr.YearTo +  " " + cr.Fuel})
         })
       }
     )
