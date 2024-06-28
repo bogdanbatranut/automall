@@ -54,8 +54,25 @@
           <div class="accordion-body">
             <div class="container">
               <div class="row">
-                <div class="col">
 
+                <div class="col">
+                  <div class="card">
+                    <div class="card-header">
+                      Years
+                    </div>
+                    <div class="card-body">
+                      <ng-container formGroupName="yearsFilter">
+                        <ng-container formArrayName="years">
+                          <ng-container *ngFor="let year of years.controls ; let i = index">
+                            <app-multiselect formControlName="{{i}}"></app-multiselect>
+                          </ng-container>
+                        </ng-container>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col">
                   <div class="card">
                     <div class="card-header">
                       Price Filter
@@ -78,10 +95,9 @@
                       </ng-container>
                     </div>
                   </div>
-
                 </div>
-                <div class="col">
 
+                <div class="col">
                   <div class="card">
                     <div class="card-header">
                       Sorting

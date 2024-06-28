@@ -35,7 +35,18 @@ export class AdsService {
       }
     )
 
+    let yearsList : number[] = [];
+    let yearList : [{checked : boolean, id : number}] = form.yearsFilter.years
+    yearList.map(
+      item => {
+        if (item.checked) {
+          yearsList.push(item.id)
+        }
+      }
+    )
+
     params = params.append("markets", marketsList.join(","))
+    params = params.append("years", yearsList.join(","))
     let finalURL = this.adsURL + ":8080/adsforcriteriaPaginated/" + criteriaId
     return this.http.get<any>(finalURL, {params : params})
   }
