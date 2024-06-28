@@ -19,8 +19,8 @@ RUN npm run build --prod
 FROM nginx:latest AS ngi
 # Copy the build output to replace the default nginx contentx
 
-#COPY /nginx.conf  /etc/nginx/conf.d/default.conf
+
 RUN #rm -rf /usr/share/nginx/html/*
 COPY --from=build /dist/src/app/dist/automall/browser /usr/share/nginx/html
-
+COPY /nginx.conf  /etc/nginx/conf.d/default.conf
 #EXPOSE 80
