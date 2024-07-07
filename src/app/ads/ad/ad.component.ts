@@ -23,7 +23,7 @@ export class AdComponent {
   chartOptions = {
     theme: "light2",
     animationEnabled: true,
-    zoomEnabled: true,
+    zoomEnabled: false,
     title: {
       text: "Price evolution"
     },
@@ -44,7 +44,10 @@ export class AdComponent {
       xValueFormatString: "DD-MM",
       yValueFormatString: "#,###.##",
       dataPoints  : [{}]
-    }]
+    }],
+    options: {
+      maintainAspectRatio: false,
+    }
   }
 
   ngOnInit() {
@@ -85,5 +88,24 @@ export class AdComponent {
       return "#FFE4C4"
     }
       return "#FFFFFF"
+  }
+
+  getMarketImg(): string {
+    if (this.ad.Market.Name == "autovit") {
+      return "https://statics.autovit.ro/optimus-storage/a/autovitro/images/logo.svg"
+    }
+    if (this.ad.Market.Name == "mobile.de") {
+      return "https://seeklogo.com/images/M/mobilede-logo-C7AD259F8A-seeklogo.com.png"
+    }
+    if (this.ad.Market.Name == "autoscout") {
+      return "https://www.autoscout24.com/assets/as24-header-footer/as24-horizontal-inverse.d34ff335.svg"
+    }
+    if (this.ad.Market.Name == "tiriacauto") {
+      return "https://www.tiriacauto.ro/images/tiriac-auto-logo.jpg"
+    }
+
+
+
+    return ""
   }
 }

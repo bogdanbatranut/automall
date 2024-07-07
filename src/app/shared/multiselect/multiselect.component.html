@@ -1,8 +1,12 @@
 <form [formGroup]="form">
 
   <label class="list-group-item">
-    <input formControlName="checked" class="form-check-input me-1" type="checkbox">
+    <input
+      formControlName="checked"
+      class="form-check-input me-1"
+      type="checkbox"
+      [checked]="true"
+    >
     {{label}}
   </label>
-
 </form>

@@ -36,10 +36,10 @@ export class AdsService {
     )
 
     let yearsList : number[] = [];
-    let yearList : [{checked : boolean, id : number}] = form.yearsFilter.years
+    let yearList : [{selected : boolean, id : number}] = form.yearsFilter.years
     yearList.map(
       item => {
-        if (item.checked) {
+        if (item.selected) {
           yearsList.push(item.id)
         }
       }

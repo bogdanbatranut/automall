@@ -1,30 +1,143 @@
 <div class="card">
   <div class="card-header">
-    <span class="badge bg-success">Success</span>
-    <span class="badge bg-danger">Danger</span>
-    <h4>Title :{{ad!.Title}} </h4>
+    <div class="row">
+      <div class="col-6">
+        <h4>{{ad!.Title}} </h4>
+      </div>
+      <div class="col-1">
+        <span *ngIf="ad.DiscountValue != 0; else regularPrice" class="badge bg-danger">
+          <h5>
+            {{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} &euro;
+          </h5>
+        </span>
+
+      </div>
+      <div class="col-1">
+        <span *ngIf="ad.DiscountValue > 0" class="badge bg-dark-subtle">
+          <h5>
+            -{{ad.DiscountValue.toLocaleString("ro-RO")}} &euro;
+          </h5>
+        </span>
+      </div>
+      <div class="col-1">
+        <span *ngIf="ad.DiscountValue > 0" class="badge bg-info">
+          <h5>
+            {{ad.DiscountPercent | number : "1.00-2" }} %
+          </h5>
+        </span>
+      </div>
+      <div class="col-3">
+        <img [src] ="getMarketImg()" class="img-fluid" alt="...">
+      </div>
+
+    </div>
+
+
+
 
   </div>
 <!--  <img src="..." class="card-img-top" alt="...">-->
-  <div class="card-body" [style.background]="getBackGroundColor()" >
+<!--  <div class="card-body" [style.background]="getBackGroundColor()" >-->
+  <div class="card-body" >
     <div class="container">
       <div class="row">
+        <div class="col-lg">
+          <img class="ad-image" src={{ad.Thumbnail}} alt="no image...">
+          <!--          <img src={{ad.Thumbnail}} style="max-height: 480px; max-width: 640px" alt="no image...">-->
+        </div>
+        <div class="col-lg">
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6">
+                  Make:
+                </div>
+                <div class="col-6">
+                  {{ad.Brand}}
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6">
+                  Model:
+                </div>
+                <div class="col-6">
+                  {{ad.CarModel}}
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6">
+                  Year:
+                </div>
+                <div class="col-6">
+                  {{ad.Year}}
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6">
+                  Km:
+                </div>
+                <div class="col-6">
+                  {{ad.Km.toLocaleString("ro-RO")}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6">
+                  Ad age:
+                </div>
+                <div class="col-6">
+                  {{ad.Age}} days
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="accordion accordion-flush" id="adAccordion_{{ad.ID}}">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed bg-dark-subtle" type="button" [attr.data-bs-toggle]="'collapse'" [attr.data-bs-target]="'#priceList_' + ad.ID" aria-expanded="false" [attr.aria-controls]="'priceList_' + ad.ID">
+                    Price history
+                  </button>
+                </h2>
+                <div id="priceList_{{ad.ID}}" class="accordion-collapse collapse" [attr.data-bs-parent]="'#adAccordion' + ad.ID">
+                  <div class="accordion-body">
+                    <div *ngFor="let price of ad.Prices ; index as i">
+                      <div class="row">
+                        <div class="col-6">{{price.CreatedAt}}</div>
+                        <div class="col-6"> {{price.Price.toLocaleString("ro-RO")}} &euro;</div>
+                      </div>
+                      <p class="card-text">   </p>
+                    </div>
+<!--                    <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+<!--          <h5 *ngIf="ad.DiscountValue != 0">Discount percent: {{ad.DiscountPercent | number : "1.00-2" }}%</h5>-->
+<!--          <h5 *ngIf="ad.DiscountValue != 0">Discount value: {{ad.DiscountValue.toLocaleString("ro-RO")}} &euro;  </h5>-->
+<!--          <h5 class="card-title"> {{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} &euro; </h5>-->
+<!--          <h5 class="card-title">{{ad.Brand}} {{ad.CarModel}} {{ad.Year}} {{ad.Km.toLocaleString("ro-RO")}} Km</h5>-->
+<!--          <p class="card-text">First seen : {{ad.Age}} days ago</p>-->
+
+        </div>
 
         <div class="col-lg">
-          <h5 *ngIf="ad.DiscountValue != 0">Discount percent: {{ad.DiscountPercent | number : "1.00-2" }}%</h5>
-          <h5 *ngIf="ad.DiscountValue != 0">Discount value: {{ad.DiscountValue.toLocaleString("ro-RO")}} &euro;  </h5>
-          <h5 class="card-title"> {{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} &euro; </h5>
-          <h5 class="card-title">{{ad.Brand}} {{ad.CarModel}} {{ad.Year}} {{ad.Km.toLocaleString("ro-RO")}} Km</h5>
-          <p class="card-text">First seen : {{ad.Age}} days ago</p>
-          <div *ngFor="let price of ad.Prices ; index as i">
-            <p class="card-text">&euro; {{price.Price.toLocaleString("ro-RO")}} {{price.CreatedAt}}</p>
-          </div>
-        </div>
-        <div class="col-lg">
-          <img src={{ad.Thumbnail}} style="max-height: 480px; max-width: 640px" alt="no image...">
-        </div>
-        <div class="col-lg">
-          <canvasjs-chart [options]="chartOptions" *ngIf="showChart"></canvasjs-chart>
+          <canvasjs-chart class="ad-image" [options]="chartOptions" *ngIf="showChart"></canvasjs-chart>
         </div>
       </div>
       <div class="row">
@@ -37,3 +150,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #regularPrice>
+  <h5>{{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} &euro; </h5>
+</ng-template>
