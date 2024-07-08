@@ -2,26 +2,26 @@
   <div class="card-header">
     <div class="row">
       <div class="col-lg-4-">
-        <h4>{{ad!.Title}} </h4>
+        {{ad!.Title}}
       </div>
-      <div class="col-lg-auto">
-        <div class="row">
+      <div class="col-lg-3">
+        <div class="row" *ngIf="ad.DiscountValue > 0 ; else regularPrice ">
           <div class="col-4">
-        <span *ngIf="ad.DiscountValue != 0; else regularPrice" class="badge bg-danger">
+        <span class="badge bg-danger">
           <h5>
             {{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} &euro;
           </h5>
         </span>
           </div>
           <div class="col-4">
-        <span *ngIf="ad.DiscountValue > 0" class="badge bg-dark-subtle">
+        <span class="badge bg-dark-subtle">
           <h5>
             -{{ad.DiscountValue.toLocaleString("ro-RO")}} &euro;
           </h5>
         </span>
           </div>
           <div class="col-4">
-        <span *ngIf="ad.DiscountValue > 0" class="badge bg-info">
+        <span class="badge bg-info">
           <h5>
             {{ad.DiscountPercent | number : "1.00-2" }} %
           </h5>
@@ -156,5 +156,7 @@
 </div>
 
 <ng-template #regularPrice>
-  <h5>{{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} &euro; </h5>
+  <div class="row">
+    <strong>{{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} &euro; </strong>
+  </div>
 </ng-template>
