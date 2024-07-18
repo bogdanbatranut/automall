@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {AdModel, Market, Price} from "../ads-list/ads.model";
+import {AdModel, Market, Price, Seller} from "../ads-list/ads.model";
 import {DecimalPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
 
@@ -17,7 +17,7 @@ import {CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
   styleUrl: './ad.component.css'
 })
 export class AdComponent {
-  @Input() ad : AdModel  = new AdModel(0,"", "", "", "", [new Price(0,0,"")], new Market(0, ""), 0, 0, 0, 0, 0, "")
+  @Input() ad : AdModel  = new AdModel(0,"", "", "", "", [new Price(0,0,"")], new Market(0, ""), 0, 0, 0, 0, 0, "", 0, new Seller(""))
   showChart : boolean = this.ad.Prices.length > 1
 
   chartOptions = {

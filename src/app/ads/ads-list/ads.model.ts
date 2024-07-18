@@ -40,6 +40,8 @@ export class AdModel {
   public DiscountValue : number
   public DiscountPercent : number
   public Thumbnail : string
+  public DailyDiscountAmmount : number
+  public Seller : Seller
 
   constructor(
     ID : number,
@@ -54,7 +56,10 @@ export class AdModel {
     Age : number,
     DiscountValue : number,
     DiscountPercent : number,
-    Thumbnail : string
+    Thumbnail : string,
+    DailyDiscountAmmount : number,
+    Seller : Seller
+
   ) {
     this.ID = ID
     this.Title = Title
@@ -69,6 +74,8 @@ export class AdModel {
     this.DiscountValue = DiscountValue
     this.DiscountPercent = DiscountPercent
     this.Thumbnail = Thumbnail
+    this.DailyDiscountAmmount = DailyDiscountAmmount
+    this.Seller = Seller
     // this.DiscountValue = this.Prices[0].Price - this.Prices[this.Prices.length -1].Price
     // this.DiscountPercent = (this.Prices[0].Price - this.Prices[this.Prices.length -1].Price)/this.Prices[0].Price * 100
   }
@@ -98,6 +105,14 @@ export class Market {
     this.ID = ID
     this.Name = Name
 
+  }
+}
+
+export class Seller {
+  public NameInMarket : string
+
+  constructor(NameInMarket : string) {
+    this.NameInMarket = NameInMarket
   }
 }
 
