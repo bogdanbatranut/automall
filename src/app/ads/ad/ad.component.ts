@@ -17,7 +17,7 @@ import {CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
   styleUrl: './ad.component.css'
 })
 export class AdComponent {
-  @Input() ad : AdModel  = new AdModel(0,"", "", "", "", [new Price(0,0,"")], new Market(0, ""), 0, 0, 0, 0, 0, "", 0, new Seller(""))
+  @Input() ad : AdModel  = new AdModel(0,"", "", "", "", [new Price(0,0,"")], new Market(0, ""), 0, 0, 0, 0, 0, "", 0, new Seller(""),0)
   showChart : boolean = this.ad.Prices.length > 1
 
   chartOptions = {

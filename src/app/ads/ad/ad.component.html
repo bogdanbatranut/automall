@@ -4,39 +4,45 @@
       <div class="col">
         {{ad!.Title}}
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-6">
         <div class="row" *ngIf="ad.DiscountValue > 0 ; else regularPrice ">
-          <div class="col-3">
+          <div class="col">
             <span class="badge bg-danger">
               <h5>
                 {{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} &euro;
               </h5>
             </span>
           </div>
-          <div class="col-3">
+          <div class="col">
             <span class="badge bg-dark-subtle">
               <h5>
                 -{{ad.DiscountValue.toLocaleString("ro-RO")}} &euro;
               </h5>
             </span>
           </div>
-          <div class="col-3">
+          <div class="col">
             <span class="badge bg-info">
               <h5>
                 {{ad.DiscountPercent | number : "1.00-2" }} %
               </h5>
             </span>
           </div>
-          <div class="col-3">
+          <div class="col">
             <span class="badge bg-info">
               <h5>
                 {{ad.DailyDiscountAmmount }} EUR / day
               </h5>
             </span>
           </div>
+          <div class="col">
+            <span class="badge bg-info">
+              <h5>
+                Dealer AVG. Dis: {{ad.DealerAverageDiscount }} %
+              </h5>
+            </span>
+          </div>
         </div>
       </div>
-
       <div class="col-lg-2">
         <img [src] ="getMarketImg()" class="img-fluid p-2" alt="...">
       </div>
@@ -112,9 +118,19 @@
             <div class="col-6">
               <div class="row">
                 <div class="col-6">
-                  Seller:
                 </div>
                 <div class="col-6">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="row">
+                <div class="col-2">
+                  Seller:
+                </div>
+                <div class="col-10">
                   {{ad.Seller.NameInMarket}}
                 </div>
               </div>
@@ -170,6 +186,15 @@
 
 <ng-template #regularPrice>
   <div class="row">
-    <strong>{{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} &euro; </strong>
+    <div class="col-lg-2">
+      <strong>{{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} &euro; </strong>
+    </div>
+    <div class="col-lg-3">
+      <span class="badge bg-dark">
+        <h5>
+          Dealer AVG. Dis: {{ad.DealerAverageDiscount }} %
+        </h5>
+      </span>
+    </div>
   </div>
 </ng-template>
