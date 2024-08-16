@@ -20,6 +20,7 @@ export class ScrapeLogsService {
   constructor(private http:HttpClient) {
     // this.logsBaseURL = "http://" + this.devBaseURL + ":" + this.logsPort
     // this.mqBaseURL = "http://" + this.devBaseURL + ":" + this.mqPort
+
   }
 
   getSessions() : Observable<Session[]> {
