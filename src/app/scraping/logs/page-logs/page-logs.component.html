@@ -1,0 +1,38 @@
+<ul class="list-group">
+  <ng-container *ngFor="let pageLog of pageLogs; index as i">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-1">
+          {{pageLog.Brand}} {{pageLog.CarModel}}
+        </div>
+
+        <div class="col-1">
+          <button type="button" class="btn btn-primary" (click)="goToLink(pageLog.VisitURL)"  >Go to page</button>
+        </div>
+
+        <div class="col-1">
+          Page number: {{pageLog.PageNumber}}
+        </div>
+
+        <div class="col-1">
+          Ads on page: <span  [ngClass]="{'badge' : pageLog.NumberOfAds == 0, 'text-bg-danger' : pageLog.NumberOfAds == 0}">{{pageLog.NumberOfAds}}</span>
+        </div>
+
+        <div class="col-6">
+          {{pageLog.MarketName}}
+          -
+          <span [ngClass]="{'badge' : true, 'text-bg-success' : pageLog.Scraped, 'text-bg-danger' : !pageLog.Scraped }">Scraped</span>
+          -
+          <span [ngClass]="{'badge' : true, 'text-bg-success' : pageLog.Consumed, 'text-bg-danger' : !pageLog.Consumed }">Consumed</span>
+<!--          <span [ngClass]="{'badge' : true, 'text-bg-success' : pageLog.Consumed, 'text-bg-danger' : !pageLog.MarketName }">Consumed</span>-->
+
+        </div>
+
+        <div class="col-1 ms-auto">
+<!--          <button type="button" class="btn btn-primary" (click)="runPage(pageLog)">Run Criteria</button>-->
+        </div>
+      </div>
+
+    </li>
+  </ng-container>
+</ul>

@@ -50,6 +50,10 @@ export class AdComponent {
     }
   }
 
+  brandLogoFile() : string {
+    return this.ad.Brand.toLowerCase() + ".png"
+  }
+
   ngOnInit() {
     this.showChart = this.ad.Prices.length > 3
     let dataPoints : any[] = []

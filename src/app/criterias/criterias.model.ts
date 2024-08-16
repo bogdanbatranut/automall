@@ -9,7 +9,8 @@ export class CriteriaModel {
   public AllowProcess : boolean
   public Fuel : string
 
-  constructor(  ID : number,
+  constructor(
+    ID : number,
    brand : string,
    carModel : string,
    yearFrom : number,

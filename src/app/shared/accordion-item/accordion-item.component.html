@@ -1,0 +1,15 @@
+<div class="accordion-item">
+  <app-accordion-header
+    [text]="getMainPanelText()"
+    [targetId]="getTargetPanelID()"
+    [session]="data"
+
+  >
+  </app-accordion-header>
+  <app-accordion-item-body
+    [accordionId]="parentId"
+    [panelId]="getPanelId()"
+    [sessionID]="getSessionID()"
+  >
+  </app-accordion-item-body>
+</div>
