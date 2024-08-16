@@ -30,20 +30,22 @@
           <li class="list-group-item">
               <div class="row">
                 <div class="col-3">
-                  {{criteria.Brand}} {{criteria.CarModel}}
+                  {{criteria.Brand}} {{criteria.CarModel}} {{criteria.Fuel}}
                 </div>
-
+                <div class="col-1">
+                  {{criteria.Fuel}}
+                </div>
                 <div class="col-1">
                   <span class="{{getCriteriaBadgeClass(criteria)}}">{{criteria.NumberOfAds}}</span>
                 </div>
 
-                <div class="col-1">
+                <div class="col-2">
                   <div *ngIf="!criteria.Finished">
                     <button type="button" class="btn btn-primary" (click)="runCriteria(criteria)">Run Criteria</button>
                   </div>
                 </div>
 
-                <div class="col-5">
+                <div class="col-3">
                   <span [ngClass]="{'badge' : true, 'text-bg-success' : criteria.Success, 'text-bg-danger' : !criteria.Success }">Success</span>
                   -
                   <span [ngClass]="{'badge' : true, 'text-bg-success' : criteria.Finished, 'text-bg-danger' : !criteria.Finished }">Finished</span>
