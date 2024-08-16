@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {CriteriaLog, Market, PageLog, Session, SessionJob} from "../datamodels/logs-data-models";
 import {PageLogsComponent} from "../scraping/logs/page-logs/page-logs.component";
 import {CriteriaModel} from "../criterias/criterias.model";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class ScrapeLogsService {
   mqBaseURL : string = "http://dev.auto-mall.ro:3113"
 
   constructor(private http:HttpClient) {
+    console.log("HUH? ", environment.backendURL)
     // this.logsBaseURL = "http://" + this.devBaseURL + ":" + this.logsPort
     // this.mqBaseURL = "http://" + this.devBaseURL + ":" + this.mqPort
 
