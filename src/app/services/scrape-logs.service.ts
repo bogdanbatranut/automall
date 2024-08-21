@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {CriteriaLog, Market, PageLog, Session, SessionJob} from "../datamodels/logs-data-models";
 import {PageLogsComponent} from "../scraping/logs/page-logs/page-logs.component";
@@ -13,15 +13,29 @@ export class ScrapeLogsService {
 
   baseURL : string = "dev.auto-mall.ro"
   devBaseURL : string = "127.0.0.1"
-  logsPort : string = "8088"
+  logsPort : string = "8085"
   mqPort : string = "3113"
-  logsBaseURL : string = "http://dev.auto-mall.ro:8088"
+  logsBaseURL : string = "http://dev.auto-mall.ro:8085"
   mqBaseURL : string = "http://dev.auto-mall.ro:3113"
+
+  static headerDict : HttpHeaders= new HttpHeaders ( {
+    'Content-Type': "application/json",
+    'Accept': 'application/json',
+    'Access-Control-Allow-Headers': "Content-Type, Origin, Accept",
+    'Access-Control-Allow-Origin': "*", // Replace * with your domain if needed
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, DELETE',
+
+  })
+
+  static requestOptions = {
+    headers: ScrapeLogsService.headerDict,
+    body : JSON.stringify(""),
+  };
 
   constructor(private http:HttpClient) {
     console.log("HUH? ", environment.backendURL)
-    // this.logsBaseURL = "http://" + this.devBaseURL + ":" + this.logsPort
-    // this.mqBaseURL = "http://" + this.devBaseURL + ":" + this.mqPort
+    this.logsBaseURL = "http://" + this.devBaseURL + ":" + this.logsPort
+    this.mqBaseURL = "http://" + this.devBaseURL + ":" + this.mqPort
 
   }
 
@@ -50,7 +64,7 @@ export class ScrapeLogsService {
   deleteSession(id : number) : void {
 
     let url = this.logsBaseURL + "/session/" + id
-    this.http.delete(url).subscribe()
+    this.http.delete(url, ScrapeLogsService.requestOptions,  ).subscribe()
   }
 
 
