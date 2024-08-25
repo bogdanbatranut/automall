@@ -67,5 +67,15 @@ export class ScrapeLogsService {
     this.http.delete(url, ScrapeLogsService.requestOptions,  ).subscribe()
   }
 
+  testPOST(id : number) : void {
+
+    let url = this.logsBaseURL + "/session/" + id
+    let body  = {
+      request : "test",
+      sessionId : id
+    }
+    this.http.post<any>(url,JSON.stringify(body)   ).subscribe(response => console.log("POST RESPONSE ", response))
+  }
+
 
 }
