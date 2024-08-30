@@ -64,7 +64,7 @@ export class ScrapeLogsService {
   deleteSession(id : number) : void {
 
     let url = this.logsBaseURL + "/session/" + id
-    this.http.delete(url, ScrapeLogsService.requestOptions,  ).subscribe()
+    this.http.delete<any>(url, ScrapeLogsService.requestOptions  ).subscribe(res => console.log(res))
   }
 
   testPOST(id : number) : void {

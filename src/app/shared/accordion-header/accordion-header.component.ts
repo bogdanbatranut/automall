@@ -20,6 +20,7 @@ export class AccordionHeaderComponent {
   }
 
   deleteSession(sessionId : number) {
+    // this.logService.testPOST(sessionId)
     this.logService.deleteSession(sessionId)
   }
 

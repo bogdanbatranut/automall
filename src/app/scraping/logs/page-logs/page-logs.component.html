@@ -7,7 +7,7 @@
         </div>
 
         <div class="col-1">
-          <button type="button" class="btn btn-primary" (click)="goToLink(pageLog.VisitURL)"  >Go to page</button>
+          <button type="button" class="btn btn-primary" (click)="goToLink(pageLog.VisitURL)"  >§Go to page</button>
         </div>
 
         <div class="col-1">
@@ -18,7 +18,7 @@
           Ads on page: <span  [ngClass]="{'badge' : pageLog.NumberOfAds == 0, 'text-bg-danger' : pageLog.NumberOfAds == 0}">{{pageLog.NumberOfAds}}</span>
         </div>
 
-        <div class="col-6">
+        <div class="col-4">
           {{pageLog.MarketName}}
           -
           <span [ngClass]="{'badge' : true, 'text-bg-success' : pageLog.Scraped, 'text-bg-danger' : !pageLog.Scraped }">Scraped</span>
@@ -26,6 +26,10 @@
           <span [ngClass]="{'badge' : true, 'text-bg-success' : pageLog.Consumed, 'text-bg-danger' : !pageLog.Consumed }">Consumed</span>
 <!--          <span [ngClass]="{'badge' : true, 'text-bg-success' : pageLog.Consumed, 'text-bg-danger' : !pageLog.MarketName }">Consumed</span>-->
 
+        </div>
+
+        <div class="col-2">
+          <span>{{pageLog.Error}}</span>
         </div>
 
         <div class="col-1 ms-auto">
