@@ -13,9 +13,9 @@ export class ScrapeLogsService {
 
   baseURL : string = "dev.auto-mall.ro"
   devBaseURL : string = "127.0.0.1"
-  logsPort : string = "8085"
+  logsPort : string = "8088"
   mqPort : string = "3113"
-  logsBaseURL : string = "http://dev.auto-mall.ro:8085"
+  logsBaseURL : string = "http://dev.auto-mall.ro:8088"
   mqBaseURL : string = "http://dev.auto-mall.ro:3113"
 
   static headerDict : HttpHeaders= new HttpHeaders ( {
@@ -33,7 +33,6 @@ export class ScrapeLogsService {
   };
 
   constructor(private http:HttpClient) {
-    console.log("HUH? ", environment.backendURL)
     // this.logsBaseURL = "http://" + this.devBaseURL + ":" + this.logsPort
     // this.mqBaseURL = "http://" + this.devBaseURL + ":" + this.mqPort
 
