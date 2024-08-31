@@ -36,4 +36,17 @@ export class LogsComponent implements OnInit{
     )
   }
 
+  deleteSession(sessionId : number) {
+    let idx : number = -1
+    this.sessions.forEach((session,index) => {
+      if (session.ID == sessionId) {
+        idx = index
+      }
+    })
+    if (idx > -1) {
+      this.sessions.splice(idx, 1);
+    }
+
+  }
+
 }
