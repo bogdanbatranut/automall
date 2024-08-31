@@ -32,8 +32,8 @@ export class ScrapeLogsService {
   };
 
   constructor(private http:HttpClient) {
-    this.logsBaseURL = "http://" + this.devBaseURL + ":" + this.devLogsPort
-    this.mqBaseURL = "http://" + this.devBaseURL + ":" + this.mqPort
+    // this.logsBaseURL = "http://" + this.devBaseURL + ":" + this.devLogsPort
+    // this.mqBaseURL = "http://" + this.devBaseURL + ":" + this.mqPort
 
   }
 
