@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ScrapeLogsService} from "../../services/scrape-logs.service";
 import {Session} from "../../datamodels/logs-data-models";
 
@@ -16,12 +16,20 @@ export class AccordionHeaderComponent {
   @Input() text! : string
   @Input() session! : Session
 
+  @Output() sessionDelete = new EventEmitter<number>();
+
   constructor(private logService : ScrapeLogsService) {
   }
 
   deleteSession(sessionId : number) {
-    // this.logService.testPOST(sessionId)
+    this.sessionDelete.emit(sessionId)
     this.logService.deleteSession(sessionId)
+
+  }
+
+  testPOST(sessionId : number) {
+    // this.logService.testPOST(sessionId)
+    this.logService.testPOST(sessionId)
   }
 
 }

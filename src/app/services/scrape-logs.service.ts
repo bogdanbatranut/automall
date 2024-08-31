@@ -13,18 +13,17 @@ export class ScrapeLogsService {
 
   baseURL : string = "dev.auto-mall.ro"
   devBaseURL : string = "127.0.0.1"
-  logsPort : string = "8088"
+  devLogsPort : string = "8085"
   mqPort : string = "3113"
   logsBaseURL : string = "http://dev.auto-mall.ro:8088"
   mqBaseURL : string = "http://dev.auto-mall.ro:3113"
 
   static headerDict : HttpHeaders= new HttpHeaders ( {
     'Content-Type': "application/json",
-    'Accept': 'application/json',
-    'Access-Control-Allow-Headers': "Content-Type, Origin, Accept",
-    'Access-Control-Allow-Origin': "*", // Replace * with your domain if needed
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, DELETE',
-
+    'Accept': 'text/plain',
+    // 'Access-Control-Allow-Headers': "Content-Type, Origin, Accept",
+    // 'Access-Control-Allow-Origin': "*", // Replace * with your domain if needed
+    // 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, DELETE',
   })
 
   static requestOptions = {
@@ -33,8 +32,8 @@ export class ScrapeLogsService {
   };
 
   constructor(private http:HttpClient) {
-    // this.logsBaseURL = "http://" + this.devBaseURL + ":" + this.logsPort
-    // this.mqBaseURL = "http://" + this.devBaseURL + ":" + this.mqPort
+    this.logsBaseURL = "http://" + this.devBaseURL + ":" + this.devLogsPort
+    this.mqBaseURL = "http://" + this.devBaseURL + ":" + this.mqPort
 
   }
 
@@ -63,7 +62,7 @@ export class ScrapeLogsService {
   deleteSession(id : number) : void {
 
     let url = this.logsBaseURL + "/session/" + id
-    this.http.delete<any>(url, ScrapeLogsService.requestOptions  ).subscribe(res => console.log(res))
+    this.http.delete<any>(url).subscribe(res => console.log(res))
   }
 
   testPOST(id : number) : void {

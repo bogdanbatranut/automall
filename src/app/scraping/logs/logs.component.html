@@ -5,6 +5,7 @@
   <app-accordion-item
     [data] = logSession
     [parentId] = "masterAccordionID"
+    (sessionDeleted)="deleteSession($event)"
   >
 
   </app-accordion-item>

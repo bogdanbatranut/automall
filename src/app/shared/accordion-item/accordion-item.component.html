@@ -3,6 +3,7 @@
     [text]="getMainPanelText()"
     [targetId]="getTargetPanelID()"
     [session]="data"
+    (sessionDelete)="sessionDelete($event)"
 
   >
   </app-accordion-header>
