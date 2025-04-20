@@ -7,7 +7,7 @@ import {AdModel} from "../ads-list/ads.model";
   providedIn: 'root',
 })
 export class AdService {
-  private host = "dev.auto-mall.ro:8088";
+  private host = "dev.auto-mall.ro:8080";
   private baseUrl = 'http://'+this.host;
 
   constructor(private http: HttpClient) {}
