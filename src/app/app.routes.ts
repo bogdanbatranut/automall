@@ -9,6 +9,7 @@ import {MarketsBrandsComponent} from "./scraping/markets-brands/markets-brands.c
 import {SupportedBrandsComponent} from "./scraping/supported-brands/supported-brands.component";
 import {LogsComponent} from "./scraping/logs/logs.component";
 import {PageLogsComponent} from "./scraping/logs/page-logs/page-logs.component";
+import {AdContainerComponent} from "./ad-container/ad-container.component";
 
 export const routes: Routes = [
   {path: 'ads-list/:id' , component : AdsListComponent},
@@ -18,8 +19,8 @@ export const routes: Routes = [
   {path: 'markets-brands', component : MarketsBrandsComponent},
   {path: 'scrape-logs', component : LogsComponent},
   {path: 'page-logs/:criteriaLogId', component : PageLogsComponent},
-
   {path: 'supported-brands', component : SupportedBrandsComponent},
   {path: 'login', component : LoginComponent},
   {path: 'register', component : RegisterComponent},
+  { path: 'ad/:id', component: AdContainerComponent },
 ];

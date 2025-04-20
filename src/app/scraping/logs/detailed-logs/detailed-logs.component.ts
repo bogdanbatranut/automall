@@ -53,6 +53,10 @@ export class DetailedLogsComponent implements OnInit{
         this.MarketsWithCriterias.push(newMarketWithCriteria)
       }
     })
+    this.MarketsWithCriterias.forEach(mwc => {
+      if (mwc.ResultsCount > 0) {
+      }
+    })
   }
 
   getMarketWithCriteria(marketId : number) {
