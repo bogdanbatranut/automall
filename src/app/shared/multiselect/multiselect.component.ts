@@ -63,6 +63,6 @@ export class MultiselectComponent implements ControlValueAccessor{
   }
 
   writeValue(obj: any): void {
-    this.form.patchValue({id : obj.id , label : obj.label, checked: obj.selected })
+    this.form.patchValue({id : obj.id , label : obj.label, checked: obj.checked })
   }
 }

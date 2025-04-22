@@ -87,7 +87,7 @@ export class AdsFilterComponent {
     let yrs = new FormArray<any>([])
     years.forEach((y) => {
       let yControl = new FormControl({
-        id : y, selected : true, label : y
+        id : y, checked : true, label : y
       })
       yrs.push(yControl)
     })
