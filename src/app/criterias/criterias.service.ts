@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient} from "@angular/common/http";
 import {CriteriaModel} from "./criterias.model";
 import {AdModel, AdModelResponse} from "../ads/ads-list/ads.model";
-import {environment} from "../../environments/environment.development";
+import {environment} from "../../environments/environment";
 import {map, Observable} from "rxjs";
 
 @Injectable({
