@@ -1,5 +1,6 @@
 export const environment = {
   production : false,
-  backendURL : "http://dev.auto-mall.ro",
-  backendPort: "8080"
+  backendURL : "http://127.0.0.1",
+  backendPort: "8080",
+  backendlogsPort : "8085",
 };

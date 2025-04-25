@@ -1,36 +1,211 @@
 <div class="card">
   <div class="card-header">
-    <h4>Market: {{ad!.Market!.Name}} </h4>
-  </div>
-<!--  <img src="..." class="card-img-top" alt="...">-->
-  <div class="card-body" [style.background]="getBackGroundColor()" >
-    <div class="container">
-      <div class="row">
+    <div class="row">
+      <div class="col">
+        {{ad!.Title}}
 
-        <div class="col-lg">
-          <h5 *ngIf="ad.DiscountValue != 0">Discount percent: {{ad.DiscountPercent | number : "1.00-2" }}%</h5>
-          <h5 *ngIf="ad.DiscountValue != 0">Discount value: {{ad.DiscountValue.toLocaleString("ro-RO")}} &euro;  </h5>
-          <h5 class="card-title"> {{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} &euro; </h5>
-          <h5 class="card-title">{{ad.Brand}} {{ad.CarModel}} {{ad.Year}} {{ad.Km.toLocaleString("ro-RO")}} Km</h5>
-          <p class="card-text">First seen : {{ad.Age}} days ago</p>
-          <div *ngFor="let price of ad.Prices ; index as i">
-            <p class="card-text">&euro; {{price.Price.toLocaleString("ro-RO")}} {{price.CreatedAt}}</p>
+        <div class="col-2">
+          <a (click)="toggleFollow(ad.ID)" class="btn" [ngClass]="ad.Followed ? 'btn-warning' : ''">
+            {{ ad.Followed ? 'Unfollow' : 'Follow' }}</a>
+        </div>
+
+      </div>
+
+      <div class="col-lg-6">
+        <div class="row" *ngIf="ad.DiscountValue > 0 ; else regularPrice ">
+          <div class="col">
+            <span class="badge bg-danger">
+              <h5>
+                {{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} &euro;
+              </h5>
+            </span>
+          </div>
+          <div class="col">
+            <span class="badge bg-dark-subtle">
+              <h5>
+                -{{ad.DiscountValue.toLocaleString("ro-RO")}} &euro;
+              </h5>
+            </span>
+          </div>
+          <div class="col">
+            <span class="badge bg-info">
+              <h5>
+                {{ad.DiscountPercent | number : "1.00-2" }} %
+              </h5>
+            </span>
+          </div>
+          <div class="col">
+            <span class="badge bg-info">
+              <h5>
+                {{ad.DailyDiscountAmmount }} EUR / day
+              </h5>
+            </span>
+          </div>
+          <div class="col">
+            <span class="badge bg-info">
+              <h5>
+                Dealer AVG. Dis: {{ad.DealerAverageDiscount }} %
+              </h5>
+            </span>
           </div>
         </div>
+      </div>
+      <div class="col-lg-2">
+        <img [src] ="getMarketImg()" class="img-fluid p-2" alt="...">
+      </div>
+
+    </div>
+  </div>
+<!--  <img src="..." class="card-img-top" alt="...">-->
+<!--  <div class="card-body" [style.background]="getBackGroundColor()" >-->
+  <div class="card-body" >
+    <div class="container">
+      <div class="row">
         <div class="col-lg">
-          <img src={{ad.Thumbnail}}>
+          <img class="ad-image" src={{ad.Thumbnail}} alt="no image...">
+          <!--          <img src={{ad.Thumbnail}} style="max-height: 480px; max-width: 640px" alt="no image...">-->
         </div>
         <div class="col-lg">
-          <canvasjs-chart [options]="chartOptions" *ngIf="showChart"></canvasjs-chart>
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6">
+                  Make:
+                </div>
+                <div class="col-6">
+                    <img src="/assets/images/brands/{{brandLogoFile()}}" alt="" class="img-fluid" style="max-height: 30px">
+<!--                    {{ad.Brand}}-->
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6">
+                  Model:
+                </div>
+                <div class="col-6">
+                  {{ad.CarModel}}
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6">
+                  Year:
+                </div>
+                <div class="col-6">
+                  {{ad.Year}}
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6">
+                  Km:
+                </div>
+                <div class="col-6">
+                  {{ad.Km.toLocaleString("ro-RO")}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6">
+                  Ad age:
+                </div>
+                <div class="col-6">
+                  {{ad.Age}} days
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6">
+                </div>
+                <div class="col-6">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="row">
+                <div class="col-2">
+                  Seller:
+                </div>
+                <div class="col-10">
+                  {{ad.Seller.NameInMarket}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="accordion accordion-flush" id="adAccordion_{{ad.ID}}">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed bg-dark-subtle" type="button" [attr.data-bs-toggle]="'collapse'" [attr.data-bs-target]="'#priceList_' + ad.ID" aria-expanded="false" [attr.aria-controls]="'priceList_' + ad.ID">
+                    Price history
+                  </button>
+                </h2>
+                <div id="priceList_{{ad.ID}}" class="accordion-collapse collapse" [attr.data-bs-parent]="'#adAccordion' + ad.ID">
+                  <div class="accordion-body">
+                    <div *ngFor="let price of ad.Prices ; index as i">
+                      <div class="row">
+                        <div class="col-6">{{price.CreatedAt}}</div>
+                        <div class="col-6"> {{price.Price.toLocaleString("ro-RO")}} &euro;</div>
+                      </div>
+                      <p class="card-text">   </p>
+                    </div>
+<!--                    <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+<!--          <h5 *ngIf="ad.DiscountValue != 0">Discount percent: {{ad.DiscountPercent | number : "1.00-2" }}%</h5>-->
+<!--          <h5 *ngIf="ad.DiscountValue != 0">Discount value: {{ad.DiscountValue.toLocaleString("ro-RO")}} &euro;  </h5>-->
+<!--          <h5 class="card-title"> {{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} &euro; </h5>-->
+<!--          <h5 class="card-title">{{ad.Brand}} {{ad.CarModel}} {{ad.Year}} {{ad.Km.toLocaleString("ro-RO")}} Km</h5>-->
+<!--          <p class="card-text">First seen : {{ad.Age}} days ago</p>-->
+
+        </div>
+
+        <div class="col-lg">
+          <canvasjs-chart class="ad-image" [options]="chartOptions" *ngIf="showChart"></canvasjs-chart>
         </div>
       </div>
       <div class="row">
         <div class="col">
 
-          <a (click)="goToLink(ad.Ad_url)" class="btn btn-primary">Go to ad</a>
+          <a (click)="goToLink(ad.Ad_url)" class="btn btn-primary">Go to ad {{ad!.Market!.Name}}</a>
 
+        </div>
+        <div class="col">
+          ad id: {{ad.ID}}
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #regularPrice>
+  <div class="row">
+    <div class="col-lg-2">
+      <strong>{{(ad.Prices[ad.Prices.length - 1].Price).toLocaleString("ro-RO")}} &euro; </strong>
+    </div>
+    <div class="col-lg-3">
+      <span class="badge bg-dark">
+        <h5>
+          Dealer AVG. Dis: {{ad.DealerAverageDiscount }} %
+        </h5>
+      </span>
+    </div>
+  </div>
+</ng-template>

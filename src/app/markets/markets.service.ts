@@ -10,7 +10,8 @@ import {map} from "rxjs";
 export class MarketsService {
   marketsURL = ""
   constructor(private http : HttpClient) {
-    this.marketsURL = "http://dev.auto-mall.ro"+":"+environment.backendPort+"/markets"
+    this.marketsURL = environment.backendURL+":"+environment.backendPort+"/markets"
+    // this.marketsURL = "http://dev.auto-mall.ro"+":"+environment.backendPort+"/markets"
   }
 
   getMarkets(){

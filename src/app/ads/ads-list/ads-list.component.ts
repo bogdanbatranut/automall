@@ -91,11 +91,11 @@ export class AdsListComponent implements OnInit{
                   pagination : data.Pagination,
                   ads : data.Ads==null ? [] : data.Ads.map(ad => {
                   return new AdModel(
-                    ad.ID, ad.Brand, ad.CarModel, ad.Ad_url,
+                    ad.ID, ad.Title, ad.Brand, ad.CarModel, ad.Ad_url,
                     ad.Prices.map(price => {
                       return new Price(price.ID, price.Price, (new Date(price.CreatedAt).toLocaleDateString("ro-RO")))
                     }),
-                    ad.Market, ad.Year, ad.Km, ad.Age, ad.DiscountValue, ad.DiscountPercent, ad.Thumbnail
+                    ad.Market, ad.Year, ad.Km, ad.Age, ad.DiscountValue, ad.DiscountPercent, ad.Thumbnail, ad.DailyDiscountAmmount, ad.Seller, ad.DealerAverageDiscount, ad.Followed
                   )
                 })
               }

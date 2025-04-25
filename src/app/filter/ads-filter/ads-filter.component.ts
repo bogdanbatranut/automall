@@ -34,8 +34,16 @@ export class AdsFilterComponent {
     return this.form.get("marketsFilter")!.get("markets") as FormArray
   }
 
+  get years() {
+    return this.form.get("yearsFilter")!.get("years") as FormArray
+  }
+
   get marketsFilter() {
     return this.form.get("marketsFilter") as FormGroup
+  }
+
+  get yearsFilter() {
+    return this.form.get("yearsFilter") as FormGroup
   }
 
   minPriceLabel : string = "Min Price:"
@@ -51,7 +59,7 @@ export class AdsFilterComponent {
     this.criteriasService.getCriterias().subscribe(
       value => {
         value.map(cr => {
-          this.criterias.push({id : cr.ID, label : cr.brand + " " + cr.carModel})
+          this.criterias.push({id : cr.ID, label : cr.brand + " " + cr.carModel + " " + cr.YearFrom + "-" + cr.YearTo +  " " + cr.Fuel})
         })
       }
     )
@@ -68,8 +76,22 @@ export class AdsFilterComponent {
       }
     )
 
+
+
     this.form.valueChanges.subscribe((value) => {
     })
+  }
+
+  buildYearsArray() : FormArray {
+    let years = [2019,2020,2021,2022,2023,2024]
+    let yrs = new FormArray<any>([])
+    years.forEach((y) => {
+      let yControl = new FormControl({
+        id : y, checked : true, label : y
+      })
+      yrs.push(yControl)
+    })
+    return yrs
   }
 
   buildForm() : FormGroup {
@@ -78,6 +100,9 @@ export class AdsFilterComponent {
       marketsFilter : new FormGroup({
         markets : new FormArray([
         ])
+      }),
+      yearsFilter : new FormGroup({
+        years : this.buildYearsArray()
       }),
       priceLimits : new FormGroup({
         minPrice : new FormControl<{value : number}>({value : 0}),

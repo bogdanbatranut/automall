@@ -30,12 +30,23 @@
             <li>
               <a class="dropdown-item" [routerLink]="['scraping-setup']" routerLinkActive="active" ariaCurrentWhenActive="page">Scraping Setup</a>
             </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['supported-brands']" routerLinkActive="active" ariaCurrentWhenActive="page">Supported Brands</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['markets-brands']" routerLinkActive="active" ariaCurrentWhenActive="page">Markets Brands</a>
+            </li>
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="logDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Scraping logs
           </a>
+          <ul class="dropdown-menu" aria-labelledby="scrapingDropdown">
+            <li>
+              <a class="dropdown-item" [routerLink]="['scrape-logs']" routerLinkActive="active" ariaCurrentWhenActive="page">Scrape Logs</a>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>

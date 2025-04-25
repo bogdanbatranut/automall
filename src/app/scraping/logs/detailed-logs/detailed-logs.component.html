@@ -1,0 +1,79 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <div *ngFor="let market of MarketsWithCriterias; index as i">
+    <li  class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        id="{{createMarketID(market.ID)}}"
+        data-bs-toggle="tab"
+        [attr.data-bs-target]=createDataBSTarget(createTabPaneId(createMarketID(market.ID)))
+        type="button"
+        role="tab"
+        [attr.aria-controls]=createTabPaneId(createMarketID(market.ID))
+        aria-selected="false">
+          {{market.MarketName}}
+          <span class="{{getMarketBadgeClass(market.ID)}}">{{market.ResultsCount}}</span>
+<!--          <span [ngClass]="{'badge' : true}">{{market.ResultsCount}}</span>-->
+      </button>
+    </li>
+  </div>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <ng-container *ngFor="let market of MarketsWithCriterias; index as i">
+    <div
+      class="tab-pane fade"
+      id="{{createTabPaneId(createMarketID(market.ID))}}"
+      role="tabpanel"
+      [attr.aria-labelledby]=createMarketID(market.ID)
+      tabindex="0">
+      <ul class="list-group">
+        <ng-container *ngFor="let criteria of market.CriteriaLogs; index as i">
+          <li class="list-group-item">
+              <div class="row">
+                <div class="col-3">
+                  {{criteria.Brand}} {{criteria.CarModel}} {{criteria.Fuel}}
+                </div>
+                <div class="col-1">
+                  {{criteria.Fuel}}
+                </div>
+                <div class="col-1">
+                  <span class="{{getCriteriaBadgeClass(criteria)}}">{{criteria.NumberOfAds}}</span>
+                </div>
+
+                <div class="col-2">
+                  <div *ngIf="!criteria.Finished">
+                    <button type="button" class="btn btn-primary" (click)="runCriteria(criteria)">Run Criteria</button>
+                  </div>
+                </div>
+
+                <div class="col-3">
+                  <span [ngClass]="{'badge' : true, 'text-bg-success' : criteria.Success, 'text-bg-danger' : !criteria.Success }">Success</span>
+                  -
+                  <span [ngClass]="{'badge' : true, 'text-bg-success' : criteria.Finished, 'text-bg-danger' : !criteria.Finished }">Finished</span>
+                </div>
+
+                <div class="col-1">
+                  {{getDurationTime(criteria)}}
+                </div>
+
+                <div class="col-1 ms-auto">
+                  <button type="button" class="btn btn-primary" [routerLink]="['/page-logs',criteria.ID]" >Details</button>
+                </div>
+            </div>
+
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </ng-container>
+<!--  <div *ngFor="let market of MarketsWithCriterias; index as i">-->
+<!--    <div-->
+<!--      class="tab-pane fade"-->
+<!--      id="{{createTabPaneId(createMarketID(market.ID))}}"-->
+<!--      role="tabpanel"-->
+<!--      [attr.aria-labelledby]=createMarketID(market.ID)-->
+<!--      tabindex="0">-->
+<!--      {{sessionID}}  {{market.ID}}-->
+<!--    </div>-->
+<!--  </div>-->
+</div>
+

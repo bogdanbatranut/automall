@@ -1,7 +1,8 @@
 import {Component, Input} from '@angular/core';
-import {AdModel, Market, Price} from "../ads-list/ads.model";
-import {DecimalPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
+import {AdModel, Market, Price, Seller} from "../ads-list/ads.model";
+import {DecimalPipe, JsonPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
+import {AdService} from "./ad.service";
 
 @Component({
   selector: 'app-ad',
@@ -11,19 +12,24 @@ import {CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
     NgForOf,
     CanvasJSAngularChartsModule,
     NgIf,
-    DecimalPipe
+    DecimalPipe,
+    NgClass
   ],
   templateUrl: './ad.component.html',
   styleUrl: './ad.component.css'
 })
 export class AdComponent {
-  @Input() ad : AdModel  = new AdModel(0, "", "", "", [new Price(0,0,"")], new Market(0, ""), 0, 0, 0, 0, 0, "")
+  @Input() ad : AdModel  = new AdModel(0,"", "", "", "", [new Price(0,0,"")], new Market(0, ""), 0, 0, 0, 0, 0, "", 0, new Seller(""),0, false)
+
+  constructor(private adService: AdService) {
+  }
+
   showChart : boolean = this.ad.Prices.length > 1
 
   chartOptions = {
     theme: "light2",
     animationEnabled: true,
-    zoomEnabled: true,
+    zoomEnabled: false,
     title: {
       text: "Price evolution"
     },
@@ -44,7 +50,14 @@ export class AdComponent {
       xValueFormatString: "DD-MM",
       yValueFormatString: "#,###.##",
       dataPoints  : [{}]
-    }]
+    }],
+    options: {
+      maintainAspectRatio: false,
+    }
+  }
+
+  brandLogoFile() : string {
+    return this.ad.Brand.toLowerCase() + ".png"
   }
 
   ngOnInit() {
@@ -77,6 +90,11 @@ export class AdComponent {
     window.open(url, "_blank");
   }
 
+  toggleFollow(adId: number) {
+    this.ad.Followed = !this.ad.Followed
+    this.adService.setFollow(this.ad.ID, this.ad.Followed)
+  }
+
   getBackGroundColor(){
     if (this.ad.DiscountValue > 0) {
       return "#E0FFFF"
@@ -85,5 +103,24 @@ export class AdComponent {
       return "#FFE4C4"
     }
       return "#FFFFFF"
+  }
+
+  getMarketImg(): string {
+    if (this.ad.Market.Name == "autovit") {
+      return "https://statics.autovit.ro/optimus-storage/a/autovitro/images/logo.svg"
+    }
+    if (this.ad.Market.Name == "mobile.de") {
+      return "https://seeklogo.com/images/M/mobilede-logo-C7AD259F8A-seeklogo.com.png"
+    }
+    if (this.ad.Market.Name == "autoscout") {
+      return "https://www.autoscout24.com/assets/as24-header-footer/as24-horizontal-inverse.d34ff335.svg"
+    }
+    if (this.ad.Market.Name == "tiriacauto") {
+      return "https://www.tiriacauto.ro/images/tiriac-auto-logo.jpg"
+    }
+
+
+
+    return ""
   }
 }

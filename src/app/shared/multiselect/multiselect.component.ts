@@ -31,7 +31,9 @@ import {AsyncPipe, JsonPipe, NgFor} from "@angular/common";
 export class MultiselectComponent implements ControlValueAccessor{
   form : FormGroup
 
-  onChange: any = () => {};
+  onChange: any = () => {
+
+  };
   onTouched: any = () => {};
 
   get label() {
@@ -43,7 +45,7 @@ export class MultiselectComponent implements ControlValueAccessor{
     this.form = new FormGroup({
       id : new FormControl(),
       label : new FormControl(),
-      checked : new FormControl(false)
+      checked : new FormControl(true)
     })
 
     this.form.valueChanges.subscribe((value) => {

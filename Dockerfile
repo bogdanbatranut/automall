@@ -1,5 +1,7 @@
 # Use official node image as the base image
-FROM node:20.10-alpine as build
+#FROM node:20.10-alpine as build
+
+FROM node:21.7.3-alpine as build
 # Set the working directory
 WORKDIR /dist/src/app
 
@@ -17,8 +19,8 @@ RUN npm run build --prod
 FROM nginx:latest AS ngi
 # Copy the build output to replace the default nginx contentx
 
-#COPY /nginx.conf  /etc/nginx/conf.d/default.conf
+
 RUN #rm -rf /usr/share/nginx/html/*
 COPY --from=build /dist/src/app/dist/automall/browser /usr/share/nginx/html
-
+COPY /nginx.conf  /etc/nginx/conf.d/default.conf
 #EXPOSE 80

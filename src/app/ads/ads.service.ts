@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AdModelResponse} from "./ads-list/ads.model";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdsService {
 
-  adsURL = "http://dev.auto-mall.ro"
+  adsURL = environment.backendURL
 // adsURL = "http://127.0.0.1"
 
   constructor( private http : HttpClient
@@ -35,7 +36,18 @@ export class AdsService {
       }
     )
 
+    let yearsList : number[] = [];
+    let yearList : [{checked : boolean, id : number}] = form.yearsFilter.years
+    yearList.map(
+      item => {
+        if (item.checked) {
+          yearsList.push(item.id)
+        }
+      }
+    )
+
     params = params.append("markets", marketsList.join(","))
+    params = params.append("years", yearsList.join(","))
     let finalURL = this.adsURL + ":8080/adsforcriteriaPaginated/" + criteriaId
     return this.http.get<any>(finalURL, {params : params})
   }

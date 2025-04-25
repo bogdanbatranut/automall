@@ -26,8 +26,20 @@ export class Pagination {
   }
 }
 
+export class SetFollowRequest {
+  public AdId : number
+  public Follow : boolean
+
+  constructor(AdId : number, Follow : boolean) {
+    this.AdId = AdId
+    this.Follow = Follow
+  }
+}
+
 export class AdModel {
+
   public ID : number
+  public Title : string
   public Brand : string
   public CarModel : string
   public Ad_url : string
@@ -39,9 +51,14 @@ export class AdModel {
   public DiscountValue : number
   public DiscountPercent : number
   public Thumbnail : string
+  public DailyDiscountAmmount : number
+  public Seller : Seller
+  public DealerAverageDiscount : number
+  public Followed : boolean
 
   constructor(
     ID : number,
+    Title : string,
     Brand : string,
     CarModel : string,
     Ad_url : string,
@@ -52,9 +69,14 @@ export class AdModel {
     Age : number,
     DiscountValue : number,
     DiscountPercent : number,
-    Thumbnail : string
+    Thumbnail : string,
+    DailyDiscountAmmount : number,
+    Seller : Seller,
+    DealerAverageDiscount : number,
+    Followed : boolean
   ) {
     this.ID = ID
+    this.Title = Title
     this.Brand = Brand
     this.CarModel = CarModel
     this.Ad_url = Ad_url
@@ -66,6 +88,10 @@ export class AdModel {
     this.DiscountValue = DiscountValue
     this.DiscountPercent = DiscountPercent
     this.Thumbnail = Thumbnail
+    this.DailyDiscountAmmount = DailyDiscountAmmount
+    this.Seller = Seller
+    this.DealerAverageDiscount = DealerAverageDiscount
+    this.Followed = Followed
     // this.DiscountValue = this.Prices[0].Price - this.Prices[this.Prices.length -1].Price
     // this.DiscountPercent = (this.Prices[0].Price - this.Prices[this.Prices.length -1].Price)/this.Prices[0].Price * 100
   }
@@ -95,6 +121,14 @@ export class Market {
     this.ID = ID
     this.Name = Name
 
+  }
+}
+
+export class Seller {
+  public NameInMarket : string
+
+  constructor(NameInMarket : string) {
+    this.NameInMarket = NameInMarket
   }
 }
 
