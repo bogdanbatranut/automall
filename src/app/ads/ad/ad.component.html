@@ -3,7 +3,14 @@
     <div class="row">
       <div class="col">
         {{ad!.Title}}
+
+        <div class="col-2">
+          <a (click)="toggleFollow(ad.ID)" class="btn" [ngClass]="ad.Follow ? 'btn-warning' : ''">
+            {{ ad.Follow ? 'Unfollow' : 'Follow' }}</a>
+        </div>
+
       </div>
+
       <div class="col-lg-6">
         <div class="row" *ngIf="ad.DiscountValue > 0 ; else regularPrice ">
           <div class="col">
@@ -179,6 +186,9 @@
 
           <a (click)="goToLink(ad.Ad_url)" class="btn btn-primary">Go to ad {{ad!.Market!.Name}}</a>
 
+        </div>
+        <div class="col">
+          ad id: {{ad.ID}}
         </div>
       </div>
     </div>

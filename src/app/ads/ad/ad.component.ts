@@ -1,7 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {AdModel, Market, Price, Seller} from "../ads-list/ads.model";
-import {DecimalPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
+import {DecimalPipe, JsonPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
+import {AdService} from "./ad.service";
 
 @Component({
   selector: 'app-ad',
@@ -11,13 +12,18 @@ import {CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
     NgForOf,
     CanvasJSAngularChartsModule,
     NgIf,
-    DecimalPipe
+    DecimalPipe,
+    NgClass
   ],
   templateUrl: './ad.component.html',
   styleUrl: './ad.component.css'
 })
 export class AdComponent {
-  @Input() ad : AdModel  = new AdModel(0,"", "", "", "", [new Price(0,0,"")], new Market(0, ""), 0, 0, 0, 0, 0, "", 0, new Seller(""),0)
+  @Input() ad : AdModel  = new AdModel(0,"", "", "", "", [new Price(0,0,"")], new Market(0, ""), 0, 0, 0, 0, 0, "", 0, new Seller(""),0, false)
+
+  constructor(private adService: AdService) {
+  }
+
   showChart : boolean = this.ad.Prices.length > 1
 
   chartOptions = {
@@ -82,6 +88,11 @@ export class AdComponent {
 
   goToLink(url: string){
     window.open(url, "_blank");
+  }
+
+  toggleFollow(adId: number) {
+    this.ad.Follow = !this.ad.Follow
+    this.adService.setFollow(this.ad.ID, this.ad.Follow)
   }
 
   getBackGroundColor(){

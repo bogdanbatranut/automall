@@ -19,4 +19,8 @@ export class AdService {
   getAdById(id: number): Observable<AdModel> {
     return this.http.get<AdModel>(`${this.baseUrl}/ad/${id}`);
   }
+
+  setFollow(id: number, follow:boolean): void {
+    this.http.post<any>(`${this.baseUrl}/follow`, {adID: id, follow: follow}).subscribe(data => {});
+  }
 }
