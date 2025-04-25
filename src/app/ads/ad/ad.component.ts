@@ -91,8 +91,8 @@ export class AdComponent {
   }
 
   toggleFollow(adId: number) {
-    this.ad.Follow = !this.ad.Follow
-    this.adService.setFollow(this.ad.ID, this.ad.Follow)
+    this.ad.Followed = !this.ad.Followed
+    this.adService.setFollow(this.ad.ID, this.ad.Followed)
   }
 
   getBackGroundColor(){

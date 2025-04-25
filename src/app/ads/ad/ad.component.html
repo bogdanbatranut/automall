@@ -5,8 +5,8 @@
         {{ad!.Title}}
 
         <div class="col-2">
-          <a (click)="toggleFollow(ad.ID)" class="btn" [ngClass]="ad.Follow ? 'btn-warning' : ''">
-            {{ ad.Follow ? 'Unfollow' : 'Follow' }}</a>
+          <a (click)="toggleFollow(ad.ID)" class="btn" [ngClass]="ad.Followed ? 'btn-warning' : ''">
+            {{ ad.Followed ? 'Unfollow' : 'Follow' }}</a>
         </div>
 
       </div>

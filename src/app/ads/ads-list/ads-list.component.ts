@@ -95,7 +95,7 @@ export class AdsListComponent implements OnInit{
                     ad.Prices.map(price => {
                       return new Price(price.ID, price.Price, (new Date(price.CreatedAt).toLocaleDateString("ro-RO")))
                     }),
-                    ad.Market, ad.Year, ad.Km, ad.Age, ad.DiscountValue, ad.DiscountPercent, ad.Thumbnail, ad.DailyDiscountAmmount, ad.Seller, ad.DealerAverageDiscount, ad.Follow
+                    ad.Market, ad.Year, ad.Km, ad.Age, ad.DiscountValue, ad.DiscountPercent, ad.Thumbnail, ad.DailyDiscountAmmount, ad.Seller, ad.DealerAverageDiscount, ad.Followed
                   )
                 })
               }

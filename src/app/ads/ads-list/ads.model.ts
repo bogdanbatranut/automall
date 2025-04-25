@@ -54,7 +54,7 @@ export class AdModel {
   public DailyDiscountAmmount : number
   public Seller : Seller
   public DealerAverageDiscount : number
-  public Follow : boolean
+  public Followed : boolean
 
   constructor(
     ID : number,
@@ -73,7 +73,7 @@ export class AdModel {
     DailyDiscountAmmount : number,
     Seller : Seller,
     DealerAverageDiscount : number,
-    Follow : boolean
+    Followed : boolean
   ) {
     this.ID = ID
     this.Title = Title
@@ -91,7 +91,7 @@ export class AdModel {
     this.DailyDiscountAmmount = DailyDiscountAmmount
     this.Seller = Seller
     this.DealerAverageDiscount = DealerAverageDiscount
-    this.Follow = Follow
+    this.Followed = Followed
     // this.DiscountValue = this.Prices[0].Price - this.Prices[this.Prices.length -1].Price
     // this.DiscountPercent = (this.Prices[0].Price - this.Prices[this.Prices.length -1].Price)/this.Prices[0].Price * 100
   }
