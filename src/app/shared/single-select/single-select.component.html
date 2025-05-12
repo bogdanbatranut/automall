@@ -1,0 +1,39 @@
+<!--<div [formGroup]="form">-->
+<!--  <div *ngFor="let option of options">-->
+<!--    <label>-->
+<!--      <input-->
+<!--        type="radio"-->
+<!--        [value]="option.id"-->
+<!--        [formControl]="formControl"-->
+<!--      />-->
+<!--      {{ option.label }}-->
+<!--    </label>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div [formGroup]="form">-->
+<!--    <div *ngFor="let option of options">-->
+<!--      <div class="form-check">-->
+<!--        <input class="form-check-input" type="radio" [name]="name" id="flexRadioDefault1">-->
+<!--          <label class="form-check-label" for="flexRadioDefault1">-->
+<!--            label-->
+<!--          </label>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<div [formGroup]="form">
+  <div *ngFor="let option of options; let i = index">
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        [name]="name"
+        [value]="option.id"
+        id="radio-{{name}}-{{i}}">
+      <label class="form-check-label" [for]="'radio-' + name + '-' + i">
+        {{ option.label }}
+      </label>
+    </div>
+  </div>
+</div>

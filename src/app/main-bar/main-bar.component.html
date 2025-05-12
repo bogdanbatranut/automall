@@ -24,11 +24,14 @@
             Scraping
           </a>
           <ul class="dropdown-menu" aria-labelledby="scrapingDropdown">
-            <li>
-              Start: <app-scrape-start></app-scrape-start>
-            </li>
+<!--            <li>-->
+<!--              Start: <app-scrape-start></app-scrape-start>-->
+<!--            </li>-->
             <li>
               <a class="dropdown-item" [routerLink]="['scraping-setup']" routerLinkActive="active" ariaCurrentWhenActive="page">Scraping Setup</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['scrape-starter']" routerLinkActive="active" ariaCurrentWhenActive="page">Scraping Start</a>
             </li>
             <li>
               <a class="dropdown-item" [routerLink]="['supported-brands']" routerLinkActive="active" ariaCurrentWhenActive="page">Supported Brands</a>
