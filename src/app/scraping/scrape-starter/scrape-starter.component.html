@@ -1,40 +1,51 @@
 <div class="container">
   <app-scrape-start></app-scrape-start>
-
   <form [formGroup]="form">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Markets</h5>
-        <ng-container formArrayName="markets">
 
-          <div class="list-group" id="markets">
-            <ng-container *ngFor="let mkt of markets.controls ; let i = index">
-              <app-multiselect formControlName="{{i}}"></app-multiselect>
-            </ng-container>
-          </div>
 
-        </ng-container>
-
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Criterias</h5>
-            <ng-container formArrayName="criterias">
-              <div class="list-group" id="criterias">
-                <ng-container *ngFor="let criteria of criterias.controls; let i = index">
-                  <app-multiselect formControlName="{{i}}">
-                  </app-multiselect>
-                </ng-container>
-              </div>
-            </ng-container>
+    <div class="accordion" id="accordionExample">
+      <!-- First Accordion: Markets -->
+      <div class="accordion-item" *ngFor="let market of markets.controls; let i = index">
+        <h2 class="accordion-header" id="headingMarket{{ i }}">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            [attr.data-bs-target]="'#collapseMarket' + i"
+            aria-expanded="false"
+            [attr.aria-controls]="'collapseMarket' + i"
+          >
+            <input
+              type="checkbox"
+              [formControl]="getFormControl(market.get('checked'))"
+              class="me-2"
+            />
+            {{ market.get('label')?.value }}
+          </button>
+        </h2>
+        <div
+          [id]="'collapseMarket' + i"
+          class="accordion-collapse collapse"
+          [attr.aria-labelledby]="'headingMarket' + i"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            <div *ngFor="let criteria of getCriterias(market).controls">
+              <input
+                type="checkbox"
+                [formControl]="getFormControl(criteria.get('checked'))"
+                class="me-2"
+              />
+              {{ criteria.get('label')?.value }}
+            </div>
           </div>
         </div>
       </div>
     </div>
+
   </form>
+
+  <button type="button" class="btn btn-success mt-3 mb-3" (click)="scrapeSelectedMarkets()">Start for selected</button>
+
 </div>
-  <pre>
-    <code>
-      {{form.value | json}}
-    </code>
-  </pre>
 

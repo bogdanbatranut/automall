@@ -5,10 +5,10 @@ import {ScrapeStarterServiceService} from "./scrape-starter-service.service";
 import {ScrapeStartComponent} from "../scrape-start/scrape-start.component";
 import {MultiselectComponent} from "../../shared/multiselect/multiselect.component";
 import {JsonPipe, NgForOf} from "@angular/common";
-import {FormArray, FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {forkJoin, map} from "rxjs";
-import {Market} from "../../markets/markets.models";
-import {CriteriaModel} from "../../criterias/criterias.model";
+import {Market, MarketCriteriasSetupModel} from "../../markets/markets.models";
+import {CriteriaModel, CriteriaSetupModel} from "../../criterias/criterias.model";
 import {SingleSelectComponent} from "../../shared/single-select/single-select.component";
 
 @Component({
@@ -28,108 +28,170 @@ import {SingleSelectComponent} from "../../shared/single-select/single-select.co
 })
 export class ScrapeStarterComponent {
 
-  form : FormGroup = new FormGroup<any>({})
-  criteriasRaw : any[]  = []
-
+  form : FormGroup ;
+  criterias : any[] = []
 
   get markets() {
     return this.form.get("markets") as FormArray
   }
 
-  get criterias() {
-    return this.form.get("criterias") as FormArray
-  }
+  // get criterias() {
+  //   return this.criterias
+  // }
 
-
-
-  requests  = [
-    this.marketsService.getMarkets().pipe(
-      map( mkts => {
-        return mkts
-      })
-    ),
-    this.criteriasService.getCriterias().pipe(
-      map( crts => {
-        return crts
-      })
-    )
-  ]
 
 
   constructor(
     private criteriasService: CriteriasService,
     private marketsService: MarketsService,
-    private starterService : ScrapeStarterServiceService
+    private starterService : ScrapeStarterServiceService,
+    private fb: FormBuilder,
   ) {
 
-    this.form = new FormGroup({
-      criterias: new FormArray([]),
-      markets: new FormArray([])
-    })
+    this.form = this.fb.group({
+      markets: this.fb.array([]),
+    });
 
   }
 
-  getData() {
-    const self = this;
-    forkJoin(this.requests)
-      .pipe(
-        map(value => {
-          return value as Array<any>
-        })
-      )
-      .subscribe(
-        ([mkts, crts]) =>
-        {
-          mkts.forEach(function(mkt : Market){
-            self.markets.push(
-              new FormControl(
-                {
-                  id: mkt.ID, checked: mkt.AllowProcess, label: mkt.Name
-                }
-              )
-            )
-          });
-          crts.forEach(function(crt : CriteriaModel){
 
-            self.criteriasRaw.push(
-              {id : crt.ID, label: self.createCriteriasLabel(crt)}
-            );
+  getMarketsWithCriterias() {
+    this.marketsService.getMarketsWithCriterias().subscribe((data) => {
+      const criteriaMap = new Map<string, any>();
 
-            self.criterias.push(
-              new FormControl(
-                {
-                  id: crt.ID, checked: crt.AllowProcess, label: self.createCriteriasLabel(crt)
-                }
-              )
-            )
-          });
+      data.forEach((mkt) => {
+        const sortedCriterias = mkt.MarketCriterias.sort((a, b) => {
+          const labelA = this.createCriteriasLabel(a.Criteria).toLowerCase();
+          const labelB = this.createCriteriasLabel(b.Criteria).toLowerCase();
+          return labelA.localeCompare(labelB);
+        });
 
-          self.form.valueChanges.subscribe(val => self.formValueChanged())
+        const criterias = this.fb.array(
+          sortedCriterias.map((crt: MarketCriteriasSetupModel) => {
+            const label = this.createCriteriasLabel(crt.Criteria);
+            if (!criteriaMap.has(label)) {
+              criteriaMap.set(label, {
+                label,
+                checked: this.fb.control(false),
+                markets: [],
+              });
+            }
+            criteriaMap.get(label).markets.push({
+              label: mkt.Name,
+              checked: this.fb.control(false),
+            });
+
+            return this.fb.group({
+              id: crt.Criteria.ID,
+              checked: false,
+              label,
+            });
+          })
+        );
+
+        this.markets.push(
+          this.fb.group({
+            id: [mkt.ID],
+            checked: [false],
+            label: [mkt.Name],
+            criterias: criterias,
+          })
+        );
+      });
+
+      this.criterias = Array.from(criteriaMap.values());
+    });
+  }
+
+  getMarketsWithCriteriasOLD() {
+    this.marketsService.getMarketsWithCriterias().subscribe((data) => {
+      data.forEach((mkt) => {
+        const sortedCriterias = mkt.MarketCriterias.sort((a, b) => {
+          const labelA = this.createCriteriasLabel(a.Criteria).toLowerCase();
+          const labelB = this.createCriteriasLabel(b.Criteria).toLowerCase();
+          return labelA.localeCompare(labelB);
+        });
+
+
+        const criterias = this.fb.array(
+          sortedCriterias.map((crt: MarketCriteriasSetupModel) =>
+            {
+              let gr = this.fb.group({
+                id: crt.Criteria.ID,
+                checked: crt.AllowScraping,
+                label: this.createCriteriasLabel(crt.Criteria),
+              })
+              return gr;
+            }
+
+          )
+        );
+        this.markets.push(
+          this.fb.group({
+            id: [mkt.ID],
+            checked: [mkt.AllowProcess],
+            label: [mkt.Name],
+            criterias: criterias,
+          })
+        );
+      });
+
+      // Process marketsControls after they are populated
+      this.markets.controls.forEach((marketGroup: AbstractControl) => {
+        const checkedControl = marketGroup.get('checked') as FormControl;
+        const criteriasArray = marketGroup.get('criterias') as FormArray;
+
+        checkedControl.valueChanges.subscribe((isChecked: boolean) => {
+          console.log("ddd", isChecked)
+            criteriasArray.controls.forEach((crt) => {
+              // if (this.allowCheckUncheckAll(criteriasArray)) {
+              crt.get('checked')?.setValue(isChecked, { emitEvent: false });
+              // }
+            });
+        });
+
+      });
+    });
+  }
+
+  ngOnInit() {
+    this.getMarketsWithCriterias();
+
+    // Listen for changes in criteria checkboxes and update market checkbox
+    this.markets.valueChanges.subscribe(() => {
+      this.markets.controls.forEach((marketGroup: AbstractControl) => {
+        const criteriasArray = marketGroup.get('criterias') as FormArray;
+        const marketCheckedControl = marketGroup.get('checked') as FormControl;
+
+        const isAnyCriteriaChecked = criteriasArray.controls.some(
+          (criteriaGroup: AbstractControl) => criteriaGroup.get('checked')?.value
+        );
+
+        if (marketCheckedControl.value !== isAnyCriteriaChecked) {
+          marketCheckedControl.setValue(isAnyCriteriaChecked, { emitEvent: false });
+          marketCheckedControl.updateValueAndValidity();
         }
-      )
+      });
+    });
   }
 
 
-  ngOnInit(){
-    this.getData()
+  createCriteriasLabel(criteria: CriteriaSetupModel): string {
+    return `${criteria.brand} ${criteria.carModel} from ${criteria.YearFrom} to ${criteria.YearTo} fuel: ${criteria.Fuel}`;
   }
 
-
-  createCriteriasLabel(criteria : CriteriaModel) : string{
-    return criteria.brand + " " + criteria.carModel + " from " + criteria.YearFrom + " to " +criteria.YearTo + " fuel: " + criteria.Fuel
+  getCriterias(mkt: AbstractControl): FormArray {
+    return mkt.get('criterias') as FormArray;
   }
 
-  formValueChanged(){
-    // this.scrapeService.activateScrapeMarketsAndCriterias(this.form.value).subscribe(val => {this.response = val})
+  getFormControl(control: AbstractControl | null): FormControl {
+    return control as FormControl;
+  }
+
+  scrapeSelectedMarkets() {
+    console.log("scrapeSelectedMarkets", this.form.value)
+    this.starterService.startScraping(this.form.value)
   }
 
   protected readonly FormControl = FormControl;
-
-  get marketControls(): FormControl[] {
-    return (this.form.get('markets') as FormArray).controls as FormControl[];
-  }
-
-  get criteriaControls(): FormControl[] {
-    return (this.form.get('criterias') as FormArray).controls as FormControl[];
-  }
 }
