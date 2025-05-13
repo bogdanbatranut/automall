@@ -82,70 +82,37 @@ export class SetupComponent {
       this.markets.controls.forEach((marketGroup: AbstractControl) => {
         const checkedControl = marketGroup.get('checked') as FormControl;
         const criteriasArray = marketGroup.get('criterias') as FormArray;
+
           checkedControl.valueChanges.subscribe((isChecked: boolean) => {
-          criteriasArray.controls.forEach((crt) => {
-            crt.get('checked')?.setValue(isChecked, { emitEvent: false });
-          });
+            if (this.allowCheckUncheckAll(criteriasArray)) {
+              criteriasArray.controls.forEach((crt) => {
+                // if (this.allowCheckUncheckAll(criteriasArray)) {
+                  crt.get('checked')?.setValue(isChecked, { emitEvent: false });
+                // }
+              });
+            }
         });
+
       });
     });
   }
 
-  getMarketsWithCriteriasOLD() {
-    this.marketsService.getMarketsWithCriterias().subscribe((data) => {
-      data.forEach((mkt) => {
+  allowCheckUncheckAll(criterias : FormArray) : boolean {
+    let totalChecked: number = 0
+    let totalUnchecked: number = 0
 
-
-
-        const criterias = this.fb.array(
-          mkt.MarketCriterias.map((crt: MarketCriteriasSetupModel) =>
-          {
-            let gr = this.fb.group({
-              id: crt.Criteria.ID,
-              checked: crt.AllowScraping,
-              label: this.createCriteriasLabel(crt.Criteria),
-            })
-              return gr;
-          }
-
-          )
-        );
-        this.markets.push(
-          this.fb.group({
-            id: [mkt.ID],
-            checked: [mkt.AllowProcess],
-            label: [mkt.Name],
-            criterias: criterias,
-          })
-        );
-      });
-
-      // Process marketsControls after they are populated
-      this.markets.controls.forEach((marketGroup: AbstractControl) => {
-        const checkedControl = marketGroup.get('checked') as FormControl;
-        const criteriasArray = marketGroup.get('criterias') as FormArray;
-
-        // checkedControl.valueChanges.subscribe((isChecked: boolean) => {
-        //   if (isChecked) {
-        //     criteriasArray.controls.forEach(crt => {
-        //       crt.value.checked = true;
-        //     });
-        //   } else {
-        //     criteriasArray.controls.forEach(crt => {
-        //       crt.value.checked = false;
-        //     });
-        //   }
-        // });
-
-
-        checkedControl.valueChanges.subscribe((isChecked: boolean) => {
-          criteriasArray.controls.forEach((crt) => {
-            crt.get('checked')?.setValue(isChecked, { emitEvent: false });
-          });
-        });
-
-      });
-    });
+    criterias.controls.forEach(
+      (c : AbstractControl) => {
+        if (c.get("checked")?.value) {
+          totalChecked++
+        }else{
+          totalUnchecked++
+        }
+      }
+    )
+    let hasChecked = totalChecked > 0
+    let hasUnchecked = totalUnchecked > 0
+    return !hasChecked || !hasUnchecked
   }
 
   createCriteriasLabel(criteria: CriteriaSetupModel): string {
@@ -167,6 +134,24 @@ export class SetupComponent {
   }
 
   protected readonly FormControl = FormControl;
+
+  checkAllCriterias(): void {
+    this.markets.controls.forEach((marketGroup: AbstractControl) => {
+      const criteriasArray = marketGroup.get('criterias') as FormArray;
+      criteriasArray.controls.forEach((criteriaGroup: AbstractControl) => {
+        criteriaGroup.get('checked')?.setValue(true);
+      });
+    });
+  }
+
+  uncheckAllCriterias(): void {
+    this.markets.controls.forEach((marketGroup: AbstractControl) => {
+      const criteriasArray = marketGroup.get('criterias') as FormArray;
+      criteriasArray.controls.forEach((criteriaGroup: AbstractControl) => {
+        criteriaGroup.get('checked')?.setValue(false);
+      });
+    });
+  }
 
   saveForm(): void {
     if (this.form.valid) {

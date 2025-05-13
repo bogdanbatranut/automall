@@ -45,7 +45,25 @@
                 </label>
               </div>
 
-              <h5>Criterias</h5>
+              <h4 class="text-center">Criterias</h4>
+
+              <div class="d-flex justify-content-between my-3">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  (click)="checkAllCriterias()"
+                >
+                  Check All Criterias
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="uncheckAllCriterias()"
+                >
+                  Uncheck All Criterias
+                </button>
+              </div>
+
               <ng-container formGroupName="{{k}}">
                 <ng-container formArrayName="criterias">
                   <ng-container *ngFor="let crt of getCriterias(mkt).controls; let j = index">
