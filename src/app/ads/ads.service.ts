@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {AdModelResponse} from "./ads-list/ads.model";
+import {AdModel, AdModelResponse} from "./ads-list/ads.model";
 import {environment} from "../../environments/environment";
 
 @Injectable({
@@ -14,6 +14,11 @@ export class AdsService {
 
   constructor( private http : HttpClient
   ) { }
+
+  getFollowedAds() : Observable<AdModel[]>{
+    let url = this.adsURL + ":8080/folowed"
+    return this.http.get<AdModel[]>(url)
+  }
 
   getAds(form : any) : Observable<AdModelResponse>{
     let criteriaId = form.criteria.selected

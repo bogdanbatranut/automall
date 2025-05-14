@@ -11,11 +11,13 @@ import {LogsComponent} from "./scraping/logs/logs.component";
 import {PageLogsComponent} from "./scraping/logs/page-logs/page-logs.component";
 import {AdContainerComponent} from "./ad-container/ad-container.component";
 import {ScrapeStarterComponent} from "./scraping/scrape-starter/scrape-starter.component";
+import {FolowedAdsComponent} from "./ads/folowed-ads/folowed-ads.component";
 
 export const routes: Routes = [
   {path: 'ads-list/:id' , component : AdsListComponent},
   {path: 'learn' , component : LearnComponent},
   {path: 'adsfilter' , component : AdsFilterComponent},
+  {path: 'folowed' , component : FolowedAdsComponent},
   {path: 'scraping-setup', component : SetupComponent},
   {path: 'scrape-starter', component : ScrapeStarterComponent},
   {path: 'markets-brands', component : MarketsBrandsComponent},
