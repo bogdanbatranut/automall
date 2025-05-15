@@ -2,6 +2,10 @@
   <div class="card-header">
     <div class="row">
       <div class="col">
+        <ng-container *ngIf="isDeleted(ad)">
+          <h1><span class="badge text-bg-danger">Deleted</span></h1>
+        </ng-container>
+
         {{ad!.Title}}
 
         <div class="col-2">
@@ -188,7 +192,7 @@
 
         </div>
         <div class="col">
-          ad id: {{ad.ID}}
+          ad id: {{ad.ID}} deleted at: {{getLocaleDate(ad.DeletedAt)}}
         </div>
       </div>
     </div>

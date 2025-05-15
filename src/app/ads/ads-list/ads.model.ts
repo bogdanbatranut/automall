@@ -39,6 +39,7 @@ export class SetFollowRequest {
 export class AdModel {
 
   public ID : number
+  public DeletedAt : string
   public Title : string
   public Brand : string
   public CarModel : string
@@ -58,6 +59,7 @@ export class AdModel {
 
   constructor(
     ID : number,
+    DeletedAt : string,
     Title : string,
     Brand : string,
     CarModel : string,
@@ -76,6 +78,7 @@ export class AdModel {
     Followed : boolean
   ) {
     this.ID = ID
+    this.DeletedAt = DeletedAt
     this.Title = Title
     this.Brand = Brand
     this.CarModel = CarModel

@@ -26,7 +26,7 @@ export class FolowedAdsComponent {
     this.adsService.getFollowedAds().subscribe((ads) => {
       ads.map(ad => {
         this.ads.push( new AdModel(
-          ad.ID, ad.Title, ad.Brand, ad.CarModel, ad.Ad_url,
+          ad.ID, ad.DeletedAt, ad.Title, ad.Brand, ad.CarModel, ad.Ad_url,
           ad.Prices.map(price => {
             return new Price(price.ID, price.Price, (new Date(price.CreatedAt).toLocaleDateString("ro-RO")))
           }),
