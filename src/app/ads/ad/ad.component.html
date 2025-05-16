@@ -192,7 +192,9 @@
 
         </div>
         <div class="col">
-          ad id: {{ad.ID}} deleted at: {{getLocaleDate(ad.DeletedAt)}}
+          <ng-container *ngIf="isDeleted(ad)">
+            ad id: {{ad.ID}} deleted at: {{getLocaleDate(ad.DeletedAt)}}
+          </ng-container>
         </div>
       </div>
     </div>

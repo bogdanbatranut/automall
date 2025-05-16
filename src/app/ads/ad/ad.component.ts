@@ -130,6 +130,9 @@ export class AdComponent {
   }
 
   getLocaleDate(date: string): string {
+    if (date == null || date == "") {
+      return ""
+    }
     return new Date(date).toLocaleDateString("ro-RO")
   }
 }
