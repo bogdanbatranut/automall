@@ -30,6 +30,20 @@
           data-bs-parent="#accordionExample"
         >
           <div class="accordion-body">
+            <button
+              type="button"
+              class="btn btn-primary btn-sm me-2"
+              (click)="toggleAllCriterias(market, true)"
+            >
+              Select All
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm"
+              (click)="toggleAllCriterias(market, false)"
+            >
+              Unselect All
+            </button>
             <div *ngFor="let criteria of getCriterias(market).controls">
               <input
                 type="checkbox"

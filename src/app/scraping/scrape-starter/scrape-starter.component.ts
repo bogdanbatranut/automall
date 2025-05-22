@@ -179,9 +179,13 @@ export class ScrapeStarterComponent {
   createCriteriasLabel(criteria: CriteriaSetupModel): string {
     return `${criteria.brand} ${criteria.carModel} from ${criteria.YearFrom} to ${criteria.YearTo} fuel: ${criteria.Fuel}`;
   }
+  //
+  // getCriterias(mkt: AbstractControl): FormArray {
+  //   return mkt.get('criterias') as FormArray;
+  // }
 
-  getCriterias(mkt: AbstractControl): FormArray {
-    return mkt.get('criterias') as FormArray;
+  getCriterias(market: AbstractControl): FormArray {
+    return (market as FormGroup).get('criterias') as FormArray;
   }
 
   getFormControl(control: AbstractControl | null): FormControl {
@@ -194,4 +198,13 @@ export class ScrapeStarterComponent {
   }
 
   protected readonly FormControl = FormControl;
+
+  toggleAllCriterias(market: AbstractControl, isChecked: boolean): void {
+    const criterias = this.getCriterias(market).controls;
+    criterias.forEach((criteria) => {
+      (criteria as FormGroup).get('checked')?.setValue(isChecked);
+    });
+  }
+
+  protected readonly FormGroup = FormGroup;
 }
