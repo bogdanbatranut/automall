@@ -19,7 +19,7 @@ import {AdService} from "./ad.service";
   styleUrl: './ad.component.css'
 })
 export class AdComponent {
-  @Input() ad : AdModel  = new AdModel(0,"", "", "", "", "", [new Price(0,0,"")], new Market(0, ""), 0, 0, 0, 0, 0, "", 0, new Seller(""),0, false)
+  @Input() ad : AdModel  = new AdModel(0,"", "", "", "", "", [new Price(0,0,"")], new Market(0, ""), 0, 0, 0, 0, 0, "", 0, new Seller(""),0, false,"")
 
   constructor(private adService: AdService) {
   }
