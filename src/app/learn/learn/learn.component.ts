@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { AsyncDropdownMultiSelectComponent } from '../../shared/async-dropdown-multi-select/async-dropdown-multi-select.component';
-import {MultiSelectComponent} from "../../shared/select/multi-select/multi-select.component";
+import {RouterOutlet} from "@angular/router";
+import {ParentFormComponent} from "../parent-form/parent-form.component";
 
 @Component({
   selector: 'app-learn',
   standalone: true,
   imports: [
-    AsyncDropdownMultiSelectComponent,
-    MultiSelectComponent
+    RouterOutlet,
+    ParentFormComponent
   ],
   templateUrl: './learn.component.html',
   styleUrl: './learn.component.css'
