@@ -23,12 +23,9 @@
     "bootstrap": "^5.3.6",
     "bootstrap-icons": "^1.11.3",
     "i": "^0.3.7",
-    "jquery": "^3.7.1",
     "ng-chartjs": "^0.2.8",
-    "popper.js": "^1.16.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "uuid": "^11.1.0",
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
