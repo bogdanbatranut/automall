@@ -3,63 +3,52 @@
   <form [formGroup]="filterForm" class="mb-3">
     <div class="row">
       <div class="col-md-3">
-        <div class="row">
-          <div class="col-md-6">
-            <h5>Age</h5>
-            <input
-              type="number"
-              class="form-control"
-              formControlName="age"
-              min="0"
-            />
-          </div>
-          <div class="col-md-6">
-            <h5>Max price</h5>
-            <input
-              type="number"
-              class="form-control"
-              formControlName="price"
-              min="0"
-            />
-          </div>
-        </div>
-
+        {{items | json}}
+        <h5>Price</h5>
+        <app-dropdown-multi-select
+          [items]="items"
+          [showSearch]="showSearch"
+          [showAll]="showAll"
+          [showStatus]="showStatus"
+          [showError]="showError"
+          placeholder="Select Foods"
+          (itemChange)="onItemChange($event)">
+        >
+        ></app-dropdown-multi-select>
+      </div>
+      <div class="col-md-3">
+        <h5>Age</h5>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="age"
+          min="0"
+        />
       </div>
       <div class="col-md-3">
         <h5>Brand</h5>
-        <div *ngFor="let brand of filterCriteria.brands">
-          <input
-            type="checkbox"
-            [value]="brand"
-            (change)="onFilterChange('brand', brand, $event)"
-            id="brand-{{brand}}"
-          />
-          <label [for]="'brand-' + brand">{{ brand }}</label>
-        </div>
+        <select
+          class="form-select"
+          formControlName="brands"
+          (change)="onBrandChange($event)"
+        >
+          <option value="" disabled selected>Select a brand</option>
+          <option *ngFor="let brand of filterCriteria.brands" [value]="brand">
+            {{ brand }}
+          </option>
+        </select>
       </div>
       <div class="col-md-3">
         <h5>Model</h5>
-        <div *ngFor="let model of filterCriteria.models">
-          <input
-            type="checkbox"
-            [value]="model"
-            (change)="onFilterChange('model', model, $event)"
-            id="model-{{model}}"
-          />
-          <label [for]="'model-' + model">{{ model }}</label>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <h5>Fuel</h5>
-        <div *ngFor="let fuel of filterCriteria.fuels">
-          <input
-            type="checkbox"
-            [value]="fuel"
-            (change)="onFilterChange('fuel', fuel, $event)"
-            id="fuel-{{fuel}}"
-          />
-          <label [for]="'fuel-' + fuel">{{ fuel }}</label>
-        </div>
+        <select
+          class="form-select"
+          formControlName="models"
+          multiple
+        >
+          <option *ngFor="let model of filterCriteria.models" [value]="model">
+            {{ model }}
+          </option>
+        </select>
       </div>
     </div>
   </form>
